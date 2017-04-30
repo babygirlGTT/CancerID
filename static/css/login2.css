@@ -4,7 +4,8 @@ html {
 body {
 	font-family:"Microsoft Yahei";
 	font-size:12px;
-	margin:0;
+	margin:0 auto;
+
 background-color:#3f51b5 
 }
 
@@ -36,44 +37,18 @@ input::-ms-clear {
 	position:relative;
 }
 .header {
-	height:50px;
+	height:35px;
 	border-bottom:1px solid #e2e2e2;
 	position:relative;
 	font-family:"Microsoft Yahei";
+	text-align: center;
+	margin-top: 8px;
 }
-.header .switch {
-	height:45px;
-	position:absolute;
-	left:60px;
+.header .login_title {
+	font-size:20px;
 	bottom:0;
-	font-size:16px;
 }
-.header .switch #switch_qlogin {
-	margin-right:85px;
-}
-.header .switch .switch_btn {
-	color:#999;
-	display:inline-block;
-	height:45px;
-	line-height:45px;
-	outline:none;
-	*hide-focus:expression(this.hideFocus=true);
-}
-.header .switch .switch_btn_focus {
-	color:#333;
-	display:inline-block;
-	height:45px;
-	line-height:45px;
-	outline:none;
-	*hide-focus:expression(this.hideFocus=true);
-}
-.header .switch .switch_btn:hover {
-	color:#333;
-	text-decoration:none;
-}
-.header .switch .switch_btn_focus:hover {
-	text-decoration:none;
-}
+
 #switch_bottom {
 	position:absolute;
 	bottom:-1px;_bottom:-2px;
