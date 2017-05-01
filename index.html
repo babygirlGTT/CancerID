@@ -2,8 +2,9 @@
 <html lang="zh">
   <head>
     <meta charset="utf-8">
-<title>测试文档</title>
+<title>病人信息页面</title>
 <link rel="stylesheet" href="static/css/material.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/mine.css">
 <script src="static/js/material.min.js"></script>
 <link href="//cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
 
@@ -51,61 +52,64 @@
         <div class="mdl-cell mdl-cell--3-col">
           
           <!-- 名字年龄输入 -->
-          <div id="infobox" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
-            <div id="basictitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+          <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
+            <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
               <label>
-              <b>基本信息</b>
+              <b>医生账户信息</b>
               </label>
             </div>
+            <div class="mdl-grid" id="docinfobox">
+                <!-- 左侧标签 -->
+                <div  id="infolabel" class="mdl-cell mdl-cell--6-col">
+                    <div class="zhongjian">
+                        <span class="inf-3">用户名</span>
+                        <span><b>&nbsp;&nbsp;:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">姓名</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">科室</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">职务</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-3">患者数</span>
+                        <span><b>&nbsp;&nbsp;:</b></span>
+                    </div>
 
-            <div id="namerow" class="mdl-grid" style="height:70px;">
-             <div id="namefield" class="mdl-cell mdl-cell--6-col" >
-                <form action="#" >
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="sample1">
-                    <label class="mdl-textfield__label" for="sample1">姓名</label>
-                  </div>
-                </form>
-              </div>
-              <div id="selector1" class="mdl-cell mdl-cell--3-col" style="margin-top:30px;">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                  <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                  <span class="mdl-radio__label">男</span>
-                </label>
-              </div>
-              <div id="selector2" class="mdl-cell mdl-cell--3-col" style="margin-top:30px;">
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                  <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
-                  <span class="mdl-radio__label">女</span>
-                </label>
-              </div>
-            </div>
-
-            <div id="agerow" class="mdl-grid">
-              <div id="agefield" class="mdl-cell mdl-cell--6-col">
-                <form action="#">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-                    <label class="mdl-textfield__label" for="sample2">年龄</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                  </div>
-                </form>
-              </div>
-              <div id="viewdetail" class="mdl-cell mdl-cell--6-col" style="margin-top:13px;">
-                <button class="mdl-button mdl-js-button mdl-button--raised">
-                查看详情
-                </button>
-              </div>
+                </div>
+                <!-- 显示医生内容 -->
+                <div id="showcontents" class="mdl-cell mdl-cell--6-col">
+                    <div class="zhongjian">
+                        <span class="inf-else">杨羽茜</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">女</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">肿瘤科</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">主治医生</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">7人</span>
+                    </div>
+                </div>
             </div>
 
           </div>
-         
 
          <!-- 诊断结果box -->
          <div id="diagnosebox" style="margin-top:10px;display:block; height:290px;border:2px solid #3f51b5;">
            <div id="diagtitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
               <label>
-              <b>诊断结果</b>
+              <b>病历查看</b>
               </label>
            </div>
           
@@ -194,11 +198,59 @@
          <!-- 9列的页面主内容 -->
         <div class="mdl-cell mdl-cell--9-col">
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <span>fachwoiiwjavo</span>
-            <p>here:The Sky Tower is an observation and telecommunications tower located in Auckland,
-            New Zealand. It is 328 metres (1,076 ft) tall, making it the tallest man-made structure
-            in the Southern Hemisphere.</p>
+            <div class="patientifo" style="margin:0px;display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div  id="patlabel" class="mdl-cell mdl-cell--6-col">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  id="patcontens" class="mdl-cell mdl-cell--6-col">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div id="viewmore" style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
           </div>
+
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
             <span>fachwoiiwjavo</span>
             <p>here:The Sky Tower is an observation and telecommunications tower located in Auckland,

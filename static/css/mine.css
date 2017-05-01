@@ -1,0 +1,52 @@
+html {
+	
+}
+#docinfobox{
+    padding:2px; 
+}
+
+.patinfobox{
+    padding:1px; 
+}
+p.doctorinfo{
+
+}
+
+#infolabel{
+    margin:0px;
+    text-align: right;
+}
+#showcontents{
+    margin-top:0px;
+    text-align: center;
+}
+#patlabel{
+    margin:0px;
+    text-align: right;
+}
+#patcontens{
+    margin-top:0px;
+    text-align: center;
+}
+.zhongjian{
+    margin-top:8px;
+}
+.inf-3{
+    letter-spacing:8px;
+    font-weight:bold;
+}
+.inf-2{
+    letter-spacing:24px;
+    font-weight:bold;
+}
+.inf-else{
+    letter-spacing:8px;
+}
+.inf-wide{
+    letter-spacing:16px;
+
+}
+.inf-small{
+    letter-spacing:4px;
+
+}
