@@ -1,0 +1,11 @@
+{% extends "loginbase.html" %}
+
+{% block body %}
+{% if error %}
+<span style="color: red">Error: {{ error }}</span><p>
+{% end %}
+<div style="display: none">
+{% module xsrf_form_html() %}
+</div>
+
+{% end %}
