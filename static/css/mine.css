@@ -1,8 +1,12 @@
 html {
 	
 }
-#docinfobox{
+.docinfobox{
     padding:2px; 
+}
+
+.patientifo{
+    margin-top: 10px;
 }
 
 .patinfobox{
@@ -12,19 +16,19 @@ p.doctorinfo{
 
 }
 
-#infolabel{
+.infolabel{
     margin:0px;
     text-align: right;
 }
-#showcontents{
+.showcontents{
     margin-top:0px;
     text-align: center;
 }
-#patlabel{
+.patlabel{
     margin:0px;
     text-align: right;
 }
-#patcontens{
+.patcontens{
     margin-top:0px;
     text-align: center;
 }
@@ -47,6 +51,6 @@ p.doctorinfo{
 
 }
 .inf-small{
-    letter-spacing:4px;
+    letter-spacing:2px;
 
 }

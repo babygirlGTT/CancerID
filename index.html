@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="static/css/material.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/mine.css">
 <script src="static/js/material.min.js"></script>
-<link href="//cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
 
 </head>
 
@@ -58,9 +57,9 @@
               <b>医生账户信息</b>
               </label>
             </div>
-            <div class="mdl-grid" id="docinfobox">
+            <div class="mdl-grid docinfobox">
                 <!-- 左侧标签 -->
-                <div  id="infolabel" class="mdl-cell mdl-cell--6-col">
+                <div  class="mdl-cell mdl-cell--6-col infolabel">
                     <div class="zhongjian">
                         <span class="inf-3">用户名</span>
                         <span><b>&nbsp;&nbsp;:</b></span>
@@ -84,7 +83,7 @@
 
                 </div>
                 <!-- 显示医生内容 -->
-                <div id="showcontents" class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell mdl-cell--6-col showcontents">
                     <div class="zhongjian">
                         <span class="inf-else">杨羽茜</span>
                     </div>
@@ -197,11 +196,12 @@
 
          <!-- 9列的页面主内容 -->
         <div class="mdl-cell mdl-cell--9-col">
+          <!-- 第一个3列-->
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <div class="patientifo" style="margin:0px;display:block; height:180px;border:1.5px solid grey;">
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
                 <div class="mdl-grid patinfobox">
                     <!-- 标签 -->
-                    <div  id="patlabel" class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
                         <div class="zhongjian">
                           <span class="inf-wide">编号</span>
                           <span>:</span>
@@ -224,7 +224,7 @@
                         </div>
                     </div>
                     <!-- 内容 -->
-                    <div  id="patcontens" class="mdl-cell mdl-cell--6-col">
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
                         <div class="zhongjian">
                           <span>001</span>
                         </div>
@@ -243,32 +243,330 @@
                     </div>
                 </div>
                 <!-- 最后面的按钮 -->
-                <div id="viewmore" style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
                     <button>
                     查看更多
                     </button>
                 </div>
             </div>
           </div>
-
+          <!-- 第二个3列-->
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <span>fachwoiiwjavo</span>
-            <p>here:The Sky Tower is an observation and telecommunications tower located in Auckland,
-            New Zealand. It is 328 metres (1,076 ft) tall, making it the tallest man-made structure
-            in the Southern Hemisphere.</p>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
           </div>
+          <!-- 第三个3列-->
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <span>fachwoiiwjavo</span>
-            <p>here:The Sky Tower is an observation and telecommunications tower located in Auckland,
-            New Zealand. It is 328 metres (1,076 ft) tall, making it the tallest man-made structure
-            in the Southern Hemisphere.</p>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
           </div>
+          <!-- 第四个3列-->
           <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <span>fachwoiiwjavo</span>
-            <p>here:The Sky Tower is an observation and telecommunications tower located in Auckland,
-            New Zealand. It is 328 metres (1,076 ft) tall, making it the tallest man-made structure
-            in the Southern Hemisphere.</p>
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>001</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
+            
           </div>
+          
         </div>
      
       </div>
