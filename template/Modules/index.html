@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+        <title>病人信息页面</title>
+        <link href="{{ static_url("css/material.min.css") }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="static/css/mine.css">
+  </head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">
+        <br>
+        <big>癌症辅助诊断系统</big><br>
+        <big>CancerID</big>
+      </span>
+      <div class="mdl-layout-spacer"></div>
+      <div align="right">
+           {% if current_user %}
+       <span>当前用户:</span>
+           <span>{{user["name"]}}</span>
+       <span>&nbsp;&nbsp;&nbsp;</span>
+           {% end %}
+       <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          <a href="/logout">退出</a> 
+        </button>
+        
+      </div>
+    </div>
+    <!-- Bottom row, not visible on scroll -->
+      
+      <!-- Navigation -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <span style="width:400px;"></span>
+        <div align="left">
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">病人信息</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">医学文献</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">疾病百科</a>
+        </div>
+      </div>
+  </header>
+  
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+      <div class="mdl-grid">
+        <!-- 左边的3列内容 -->
+        <div class="mdl-cell mdl-cell--3-col">
+          
+          <!-- 名字年龄输入 -->
+          <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
+            <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+              <label>
+              <b>医生账户信息</b>
+              </label>
+            </div>
+            <div class="mdl-grid docinfobox">
+                <!-- 左侧标签 -->
+                <div  class="mdl-cell mdl-cell--6-col infolabel">
+                    <div class="zhongjian">
+                        <span class="inf-3">用户名</span>
+                        <span><b>&nbsp;&nbsp;:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">姓名</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">科室</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-2">职务</span>
+                        <span><b>:</b></span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-3">患者数</span>
+                        <span><b>&nbsp;&nbsp;:</b></span>
+                    </div>
+
+                </div>
+                <!-- 显示医生内容 -->
+                <div class="mdl-cell mdl-cell--6-col showcontents">
+                    <div class="zhongjian">
+                        <span class="inf-else">{{user["name"]}}</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">男</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">肿瘤科</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">主治医生</span>
+                    </div>
+                    <div class="zhongjian">
+                        <span class="inf-else">{{len(user["patients"])}}人</span>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+         <!-- 诊断结果box -->
+         <div id="diagnosebox" style="margin-top:10px;display:block; height:290px;border:2px solid #3f51b5;">
+           <div id="diagtitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+              <label>
+              <b>病历查看</b>
+              </label>
+           </div>
+          
+          <div><span style="margin-right:2px;margin-top:3px;float:right;">勾选以进行对比</span>
+          </div>
+          <div id="showlist" class="mdl-grid" style="clear:both;margin:10px 5px 5px 5px;height:188px;">
+            
+            <ul class="mdl-cell mdl-cell--12-col demo-list-control mdl-list" style="margin-right:0px;overflow-y:scroll">
+              <li class="mdl-list__item" id="item1">
+                <span class="mdl-list__item-primary-content">
+                  Bryan Cranston
+                </span>
+                <span class="mdl-list__item-primary-content">
+                 50%
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                    <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
+                  </label>
+                </span>
+              </li>
+              <li class="mdl-list__item" id="item2">
+                <span class="mdl-list__item-primary-content">
+                  Bryan Cranston
+                </span>
+                <span class="mdl-list__item-primary-content">
+                 40%
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
+                    <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input"  />
+                  </label>
+                </span>
+              </li>
+              <li class="mdl-list__item" id="item3">
+                <span class="mdl-list__item-primary-content">
+                  Bryan Cranston
+                </span>
+                <span class="mdl-list__item-primary-content">
+                 30%
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                    <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input"  />
+                  </label>
+                </span>
+              </li>
+              <li class="mdl-list__item" id="item4">
+                <span class="mdl-list__item-primary-content">
+                  Bryan Cranston
+                </span>
+                <span class="mdl-list__item-primary-content">
+                 20%
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
+                    <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input"  />
+                  </label>
+                </span>
+              </li>
+              <li class="mdl-list__item" id="item5">
+                <span class="mdl-list__item-primary-content">
+                  Bryan Cranston
+                </span>
+                <span class="mdl-list__item-primary-content">
+                 20%
+                </span>
+                <span class="mdl-list__item-secondary-action">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5">
+                    <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input"  />
+                  </label>
+                </span>
+              </li>
+            </ul>
+
+          </div>
+          
+          <div id="viewmore" style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">
+            <button>
+              查看更多
+            </button>
+          </div>
+         </div>
+        </div>
+
+         <!-- 9列的页面主内容 -->
+        <div class="mdl-cell mdl-cell--9-col">
+          {% for patient in user["patients"]%}
+          <!-- 第一个3列-->
+          <div class="mdl-cell mdl-cell--3-col" style="float:left;">
+            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
+                <div class="mdl-grid patinfobox">
+                    <!-- 标签 -->
+                    <div class="mdl-cell mdl-cell--6-col patlabel">
+                        <div class="zhongjian">
+                          <span class="inf-wide">编号</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">姓名</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">年龄</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-wide">性别</span>
+                          <span>:</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span class="inf-small">诊断结果</span>
+                          <span>:</span>
+                        </div>
+                    </div>
+                    <!-- 内容 -->
+                    <div  class="mdl-cell mdl-cell--6-col patcontens">
+                        <div class="zhongjian">
+                          <span>{{patient}}</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>张朝健</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>30岁</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>男</span>
+                        </div>
+                        <div class="zhongjian">
+                          <span>弹簧脚</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最后面的按钮 -->
+                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
+                    <button>
+                    查看更多
+                    </button>
+                </div>
+            </div>
+            </div>
+            {% end %}
+          </div>
+
+      </div>
+        <!-- Your content goes here --></div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+      <div class="page-content"><!-- Your content goes here -->
+        <iframe src="http://baike.baidu.com/fenlei/%E7%96%BE%E7%97%85" frameborder="1" width="1000px"></iframe>
+      </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+      <div class="page-content"><!-- Your content goes here -->
+        <iframe src="http://yixue.baidu.com" frameborder="1" width="1000px"></iframe>
+      </div>
+    </section>
+  </main>
+  </div>
+    <script src="{{ static_url("js/material.min.js") }}" type="text/javascript"></script>
+  </body>
+</html>
