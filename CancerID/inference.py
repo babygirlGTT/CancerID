@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-  
 import json
-
+import pymongo
 # 返回a与b差集(a-b)
 def diff_set(a, b):
     diff_list = list(set(a) - (set(b)))

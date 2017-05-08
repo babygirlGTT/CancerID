@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-  
-#mongodb中抽取数据形成文档存储
 import pymongo
 from pymongo import MongoClient
 client = MongoClient()
