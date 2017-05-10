@@ -2,9 +2,10 @@
 <html lang="zh">
   <head>
     <meta charset="utf-8">
-        <title>病人信息页面</title>
-        <link href="{{ static_url("css/material.min.css") }}" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="static/css/mine.css">
+        <title>病人信息-CancerID</title>
+        <link href="{{ static_url("css/material.min.css")}}" rel="stylesheet" type="text/css" />
+        <link href="{{ static_url("css/materialize.min.css")}}" rel="stylesheet" type="text/css"/>
+        <link href="{{ static_url("css/mine.css")}}" rel="stylesheet" type="text/css" >
   </head>
 
 <body>
@@ -27,7 +28,7 @@
            {% end %}
        <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
           <a href="/logout">退出</a> 
-        </button>
+       </button>
         
       </div>
     </div>
@@ -43,233 +44,189 @@
         </div>
       </div>
   </header>
-  
+
   <main class="mdl-layout__content">
-    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
-      <div class="page-content">
-      <div class="mdl-grid">
+    <div class="page-content"><!-- Your content goes here -->
+
+      <div class="row">
         <!-- 左边的3列内容 -->
-        <div class="mdl-cell mdl-cell--3-col">
+        <div class="col s3" style="padding-top:8px;">
           
-          <!-- 名字年龄输入 -->
-          <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
-            <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
-              <label>
-              <b>医生账户信息</b>
-              </label>
-            </div>
-            <div class="mdl-grid docinfobox">
-                <!-- 左侧标签 -->
-                <div  class="mdl-cell mdl-cell--6-col infolabel">
-                    <div class="zhongjian">
-                        <span class="inf-3">用户名</span>
-                        <span><b>&nbsp;&nbsp;:</b></span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-2">姓名</span>
-                        <span><b>:</b></span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-2">科室</span>
-                        <span><b>:</b></span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-2">职务</span>
-                        <span><b>:</b></span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-3">患者数</span>
-                        <span><b>&nbsp;&nbsp;:</b></span>
-                    </div>
-
-                </div>
-                <!-- 显示医生内容 -->
-                <div class="mdl-cell mdl-cell--6-col showcontents">
-                    <div class="zhongjian">
-                        <span class="inf-else">{{user["name"]}}</span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-else">男</span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-else">肿瘤科</span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-else">主治医生</span>
-                    </div>
-                    <div class="zhongjian">
-                        <span class="inf-else">{{len(user["patients"])}}人</span>
-                    </div>
-                </div>
-            </div>
-
-          </div>
-
-         <!-- 诊断结果box -->
+  
+         <!-- 病历查看 -->
          <div id="diagnosebox" style="margin-top:10px;display:block; height:290px;border:2px solid #3f51b5;">
-           <div id="diagtitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
-              <label>
+           <div id="diagtitle" style="height:27px;background-color:#3f51b5;text-align:center;color:aliceblue">
+              <label style="font-size:18px;color:aliceblue">
               <b>病历查看</b>
               </label>
            </div>
-          
-          <div><span style="margin-right:2px;margin-top:3px;float:right;">勾选以进行对比</span>
-          </div>
-          <div id="showlist" class="mdl-grid" style="clear:both;margin:10px 5px 5px 5px;height:188px;">
-            
-            <ul class="mdl-cell mdl-cell--12-col demo-list-control mdl-list" style="margin-right:0px;overflow-y:scroll">
-              <li class="mdl-list__item" id="item1">
-                <span class="mdl-list__item-primary-content">
-                  Bryan Cranston
-                </span>
-                <span class="mdl-list__item-primary-content">
-                 50%
-                </span>
-                <span class="mdl-list__item-secondary-action">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
-                    <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
-                  </label>
-                </span>
-              </li>
-              <li class="mdl-list__item" id="item2">
-                <span class="mdl-list__item-primary-content">
-                  Bryan Cranston
-                </span>
-                <span class="mdl-list__item-primary-content">
-                 40%
-                </span>
-                <span class="mdl-list__item-secondary-action">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
-                    <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input"  />
-                  </label>
-                </span>
-              </li>
-              <li class="mdl-list__item" id="item3">
-                <span class="mdl-list__item-primary-content">
-                  Bryan Cranston
-                </span>
-                <span class="mdl-list__item-primary-content">
-                 30%
-                </span>
-                <span class="mdl-list__item-secondary-action">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
-                    <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input"  />
-                  </label>
-                </span>
-              </li>
-              <li class="mdl-list__item" id="item4">
-                <span class="mdl-list__item-primary-content">
-                  Bryan Cranston
-                </span>
-                <span class="mdl-list__item-primary-content">
-                 20%
-                </span>
-                <span class="mdl-list__item-secondary-action">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
-                    <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input"  />
-                  </label>
-                </span>
-              </li>
-              <li class="mdl-list__item" id="item5">
-                <span class="mdl-list__item-primary-content">
-                  Bryan Cranston
-                </span>
-                <span class="mdl-list__item-primary-content">
-                 20%
-                </span>
-                <span class="mdl-list__item-secondary-action">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5">
-                    <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input"  />
-                  </label>
-                </span>
-              </li>
-            </ul>
+           <!-- 下拉菜单列表-->
+           <div class="bin-list" style="margin:0px;overflow:auto">
+              <div class="subNav  currentDd currentDt">
+               001 张朝健
+              </div>
+              <ul class="navContent" style="display:block;">
 
-          </div>
+                	<li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+
+              </ul>
+              <div class="subNav">
+                002 张建聪</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+
+              </ul>
+              <div class="subNav">003 姚望</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+              </ul>
+              <div class="subNav">004 郑炜</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+              </ul>
+              <div class="subNav">005 武奕</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+              </ul>
+              <div class="subNav">006 姚纯然</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+              </ul>
+              <div class="subNav">007 杨羽茜</div>
+              <ul class="navContent">
+                  <li class="lsitem"><a href="#">门诊病历</a></li>
+                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">检查单</a></li>
+                	<li class="lsitem"><a href="#">处置单</a></li>
+              </ul>
+           </div>
           
-          <div id="viewmore" style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">
-            <button>
-              查看更多
-            </button>
-          </div>
+             
          </div>
         </div>
 
-         <!-- 9列的页面主内容 -->
-        <div class="mdl-cell mdl-cell--9-col">
-          {% for patient in user["patients"]%}
-          <!-- 第一个3列-->
-          <div class="mdl-cell mdl-cell--3-col" style="float:left;">
-            <div class="patientifo" style="display:block; height:180px;border:1.5px solid grey;">
-                <div class="mdl-grid patinfobox">
-                    <!-- 标签 -->
-                    <div class="mdl-cell mdl-cell--6-col patlabel">
-                        <div class="zhongjian">
-                          <span class="inf-wide">编号</span>
-                          <span>:</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span class="inf-wide">姓名</span>
-                          <span>:</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span class="inf-wide">年龄</span>
-                          <span>:</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span class="inf-wide">性别</span>
-                          <span>:</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span class="inf-small">诊断结果</span>
-                          <span>:</span>
-                        </div>
-                    </div>
-                    <!-- 内容 -->
-                    <div  class="mdl-cell mdl-cell--6-col patcontens">
-                        <div class="zhongjian">
-                          <span>{{patient}}</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span>张朝健</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span>30岁</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span>男</span>
-                        </div>
-                        <div class="zhongjian">
-                          <span>弹簧脚</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 最后面的按钮 -->
-                <div  style="height:27px;font-size:30px;text-align:center;margin-top:-5px;">     
-                    <button>
-                    查看更多
-                    </button>
-                </div>
-            </div>
-            </div>
-            {% end %}
-          </div>
 
+         <!-- 右边的页面主内容 -->
+        <div class="col s3">
+          <!-- 第一个3列-->
+          <div >
+            <div class="card mycard">
+                  <div class="card-content black-text" style="padding:6px;">
+                  
+                    <table class="tdcentered"> 
+                      <tbody>
+                        <tr>
+                          <td class="tdlabel">编号:</td>
+                          <td class="tdcontents">001</td>
+                        </tr>
+                        <tr>
+                          <td class="tdlabel">姓名:</td>
+                          <td class="tdcontents">张朝健</td>
+                        </tr>
+                        <tr>
+                          <td class="tdlabel">年龄:</td>
+                          <td class="tdcontents">30</td>
+                        </tr>
+                        <tr>
+                          <td class="tdlabel">性别:</td>
+                          <td class="tdcontents">男</td>            
+                        </tr>
+                        <tr>
+                          <td class="tdlabel">诊断结果:</td>
+                          <td class="tdcontents">XXX</td>           
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-action mine-card-action" style="text-align:center;padding:4px;">
+                    <a  id="bluelink"  href="/diagnosis">查看详情</a>
+                  </div>
+                </div>
+            
+            </div>
+             
+             <!-- 医生账户信息 
+            <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
+              <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+                <label style="font-size:18px;color:aliceblue">
+                <b>医生账户信息</b>
+                </label>
+              </div>
+              <div class="docinfobox" style="display:block;width:99%;">
+                <table class="tdcentered">
+                  <tbody>
+                    <tr>
+                      <td class="tdlabel">编号:</td>
+                      <td class="tdcontents">001</td>
+                    </tr>
+                    <tr>
+                      <td class="tdlabel">姓名:</td>
+                      <td class="tdcontents">张朝健</td>
+                    </tr>
+                    <tr>
+                      <td class="tdlabel">年龄:</td>
+                      <td class="tdcontents">30</td>
+                    </tr>
+                    <tr>
+                      <td class="tdlabel">性别:</td>
+                      <td class="tdcontents">男</td>            
+                    </tr>
+                    <tr>
+                      <td class="tdlabel">诊断结果:</td>
+                      <td class="tdcontents">XXX</td>           
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="text-align:center;height:24px;">
+                  <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mybutton">
+                    查看详情
+                  </button>
+                </div>    
+                      
+              </div>
+
+            </div>
+             -->
+          </div>
+         
+          <!-- 第四个3列-->
+        
+        </div>
+     
       </div>
-        <!-- Your content goes here --></div>
-    </section>
-    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
-      <div class="page-content"><!-- Your content goes here -->
-        <iframe src="http://baike.baidu.com/fenlei/%E7%96%BE%E7%97%85" frameborder="1" width="1000px"></iframe>
-      </div>
-    </section>
-    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
-      <div class="page-content"><!-- Your content goes here -->
-        <iframe src="http://yixue.baidu.com" frameborder="1" width="1000px"></iframe>
-      </div>
-    </section>
+    </div>
   </main>
+
   </div>
-    <script src="{{ static_url("js/material.min.js") }}" type="text/javascript"></script>
+    <script src="{{ static_url("js/material.min.js") }}"></script>
+    <script src="{{ static_url("js/materialize.min.js")}}"></script>
+    <script src="{{ static_url("js/jquery-1.3.2.js")}}"></script>
+  <script type="text/javascript">
+  $(function(){
+  $(".subNav").click(function(){
+        $(this).toggleClass("currentDd").siblings(".subNav").removeClass("currentDd")
+        $(this).toggleClass("currentDt").siblings(".subNav").removeClass("currentDt")
+        $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500)
+    })	
+  })
+  </script>
   </body>
 </html>

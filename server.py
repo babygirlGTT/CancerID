@@ -15,13 +15,13 @@ define("port", default=8080, help="run on the given port", type=int)
  
 class BaseHandler(tornado.web.RequestHandler): 
     @property #属性 
-    def db(self): 
-        return self.application.db 
+    def db_client(self): 
+        return self.application.db_client 
  
     def get_current_user(self): 
         user_id = self.get_secure_cookie("doctor_id") 
         if not user_id: return None #没有此用户 
-        return self.db.doctorinfo.find_one({"id":user_id}) 
+        return self.db_client.doctor.doctorinfo.find_one({"id":user_id}) 
  
 class MainHandler(BaseHandler): 
     @tornado.web.authenticated 
@@ -37,7 +37,7 @@ class LoginHandler(BaseHandler):
  
     @gen.coroutine #异步 
     def post(self): 
-        doctor = self.db.doctorinfo.find_one({"id":self.get_argument("doctor_id")}) 
+        doctor = self.db_client.doctor.doctorinfo.find_one({"id":self.get_argument("doctor_id")}) 
         if not doctor: 
             self.render("Modules/login.html", error="没有找到此医生") 
             return 
@@ -52,6 +52,28 @@ class LogoutHandler(BaseHandler):
     def get(self): 
         self.clear_cookie("doctor_id") 
         self.redirect(self.get_argument("next","/")) 
+
+class DiagHandler(BaseHandler):
+    def get_patient_info(self):
+        '''病人简要信息'''
+        pass
+
+    def get_diag_results(self):
+        '''诊断结果'''
+        pass
+
+    def get_diag_evidence(self):
+        '''诊断依据'''
+        pass
+
+    def get_recom_items(self):
+        '''推荐项目'''
+        pass
+
+    @tornado.web.authenticated 
+    def get(self): 
+        user = self.get_current_user() 
+        self.render("Modules/dignosis.html",user = user) 
  
 class Application(tornado.web.Application): 
     def __init__(self): 
@@ -59,6 +81,7 @@ class Application(tornado.web.Application):
                     (r"/", MainHandler), 
                     (r"/login", LoginHandler), 
                     (r"/logout", LogoutHandler), 
+                    (r"/diagnosis", DiagHandler), 
                     ] 
         settings = dict( 
             title = u"CancerID-CodePlay", 
@@ -68,7 +91,7 @@ class Application(tornado.web.Application):
             login_url = "/login",#重定向路径 
             xsrf_cookies = True, 
         )  
-        self.db = MongoClient('localhost',27017).doctor 
+        self.db_client = MongoClient('localhost',27017) 
         tornado.web.Application.__init__(self, handlers, **settings) 
  
 def main(): 

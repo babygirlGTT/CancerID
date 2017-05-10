@@ -25,6 +25,18 @@ def dict_gen(dic, fn, id='ITEMID',key='VALUENUM'):
                     dic[row[id]] = [[float(row[key]), float(row[key])], s]   #存入字典
     return dic
 
+def dict_gen(dic, f, value):
+    with open('/home/zn/Documents/CHARTEVENTS.csv', 'rb') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row['VALUENUM']: #判断VALUENUM是否为空
+                if row['ITEMID'] in dic.keys():   #判断是否存在于字典中
+                    dic[row['ITEMID']] = compare(dic[row['ITEMID']], float(row['VALUE']))   #比较数值，更新字典
+                else:
+                    dic[row['ITEMID']] = [[float(row['VALUE']), float(row['VALUE'])], [float(row['VALUE'])]]   #存入字典
+    return dic
+
+
 def main():
     s = time.time()
     dic = {}
