@@ -3,21 +3,13 @@
 import math
 import json
 
-def intvls(bound, nums):
-    ivnum = int(math.log(len(nums), 2))
-    ls = [bound[0]]
-    if ivnum:
-        l = (bound[1]-bound[0])/(ivnum+1)
-        for i in range(ivnum):
-            ls.append(ls[i] + l)
-        ls.append(bound[1])
-    else:
-        ls.append(bound[1])
-    return ls
-
 def intvl_change(dic):
     for key in dic.keys():
-        dic[key] = intvls(dic[key][0], dic[key][1])
+        itvl_num = int(math.log(len(dic[key]['nums']), 2)) + 1
+        itvl_len = (dic[key]['max'] - dic[key]['min']) / itvl_num
+        dic[key]['itvl_num'] = itvl_num
+        dic[key]['itvl_len'] = itvl_len
+        dic[key].pop('nums')
     return dic
 
 def main():
@@ -25,7 +17,7 @@ def main():
         dic = json.load(f)
     dic = intvl_change(dic)
     with open('/home/zn/Desktop/data/item_dict_final.json', 'wb') as f:
-        dic = json.dump(dic, f)
+        json.dump(dic, f)
 
 if __name__ == '__main__':
     main()

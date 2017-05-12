@@ -41,25 +41,27 @@ def main():
     s = time.time()
     dic = {}
 
-    fn = '/media/zn/00051A0B00093CEE/mimic/CHARTEVENTS_DATA_TABLE.csv'
-    dic = dict_gen(dic, fn)
-    e = time.time()
-    print e-s
-
-    fn = '/home/zn/Desktop/LABEVENTS_DATA_TABLE.csv'
-    dic = dict_gen(dic, fn)
-    e = time.time()
-    print e-s
-
-    fn = '/home/zn/Desktop/OUTPUTEVENTS_DATA_TABLE.csv'
+    fn = '/home/zn/Desktop/mimic/OUTPUTEVENTS_DATA_TABLE.csv'
     dic = dict_gen(dic, fn, key='VALUE')
+    e = time.time()
+    print e-s
+
+    s = time.time()
+    fn = '/home/zn/Desktop/mimic/LABEVENTS_DATA_TABLE.csv'
+    dic = dict_gen(dic, fn)
+    e = time.time()
+    print e-s
+
+    s = time.time()
+    fn = '/home/zn/Desktop/mimic/CHARTEVENTS_DATA_TABLE.csv'
+    dic = dict_gen(dic, fn)
     e = time.time()
     print e-s
 
     for key in dic.keys():
         dic[key]['nums'] = list(dic[key]['nums'])
-    with open('/home/zn/Desktop/data/item_dict.json', 'wb') as f:
-        json.dump(dic, f)   #存入json文件
+    with open('/home/zn/Desktop/item_dict.json', 'wb') as f:
+        json.dump(dic, f)  #存入json文件
 
 if __name__ == '__main__':
     main()
