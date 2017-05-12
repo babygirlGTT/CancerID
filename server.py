@@ -32,7 +32,7 @@ class MainHandler(BaseHandler):
         self.render("Modules/index.html",user = user) 
  
 class LoginHandler(BaseHandler): 
-    def get(self): 
+    def get(suelf): 
         self.render("Modules/login.html", error=None) 
  
     @gen.coroutine #异步 

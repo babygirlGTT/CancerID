@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+<title>测试文档</title>
+<link rel="stylesheet" href="static/css/material.min.css">
+<link rel="stylesheet" href="static/css/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/mine.css">
+<script src="static/js/material.min.js"></script>
+<script src="static/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="static/js/mine.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><big>CancerID</big></span>
+      <div class="mdl-layout-spacer"></div>
+      <div align="right">
+       <span>当前用户:吴林容</span>
+       <span>&nbsp;&nbsp;&nbsp;</span>
+       <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          exit
+        </button>
+        
+      </div>
+    </div>
+    <!-- Bottom row, not visible on scroll -->
+    
+      
+      <!-- Navigation -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <span style="width:400px;"></span>
+        <div align="left">
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">病人信息</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">医学数据库</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">疾病百科</a>
+        </div>
+      
+      </div>
+  
+  </header>
+ 
+  
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here -->
+
+      <div class="mdl-grid">
+        <!-- 左边的小列内容 -->
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--8-col-tablet">
+          
+          <!-- 病人基本信息 -->
+          <div id="infobox" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
+            <div id="basictitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+              <label style="font-size:18px;color:aliceblue">
+              <b>基本信息</b>
+              </label>
+            </div>
+            <div class="basictext">
+              <div class="patinfobox">
+                  <table class="tdcentered" style="margin-top:10px;">
+                    <tbody>
+                      <tr>
+                        <td class="tdlabel">编号:</td>
+                        <td class="tdcontents">001</td>
+                      </tr>
+                      <tr>
+                        <td class="tdlabel">姓名:</td>
+                        <td class="tdcontents">张朝健</td>
+                      </tr>
+                      <tr>
+                        <td class="tdlabel">年龄:</td>
+                        <td class="tdcontents">30</td>
+                      </tr>
+                      <tr>
+                        <td class="tdlabel">性别:</td>
+                        <td class="tdcontents">男</td>            
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+              </div>
+              <div style="text-align:center;height:24px;margin-top:10px;">
+                <button  class="mdl-button mdl-js-button mdl-button--raised mybutton">
+                  查看病历详情
+                </button>
+              </div>    
+                        
+            </div>
+          </div>
+         
+
+         <!-- 诊断结果box -->
+         <div id="diagnosebox" style="margin-top:10px;display:block; height:260px;border:2px solid #3f51b5;">
+           <div id="diagtitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
+              <label style="font-size:18px;color:aliceblue">
+              <b>诊断结果</b>
+              </label>
+           </div>
+          
+           <div  style="margin:3px 2px 8px 0px;float:right;"><span>勾选以进行对比</span>
+           </div>
+
+          
+          <div style="clear:both;width:100%;height:155px;margin:0px;overflow-y:auto">
+          <table class="noborder" style="clear:both;width:100%;">
+            <tbody>
+              <tr>
+                <td class="dgcontents">血管瘤</td>
+                <td class="dgrate">58%</td>
+                <td class="dgcheck">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                    <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td class="dgcontents">脂肪瘤</td>
+                <td class="dgrate">49%</td>
+                <td class="dgcheck">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
+                    <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input" />
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td class="dgcontents">胰岛细胞瘤</td>
+                <td class="dgrate">36%</td>
+                <td class="dgcheck">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
+                    <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input" />
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td class="dgcontents">平滑肌瘤</td>
+                <td class="dgrate">30%</td>
+                <td class="dgcheck">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
+                    <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input" />
+                  </label>
+                </td>            
+              </tr>
+              <tr>
+                <td class="dgcontents">脑肿瘤</td>
+                <td class="dgrate">30%</td>
+                <td class="dgcheck">
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5" >
+                    <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input" />
+                  </label>
+                </td>           
+              </tr>
+            </tbody>
+          </table>        
+          </div>
+          <div style="text-align:center;height:28px;">
+            <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised dgbutton">
+              查看更多
+            </button>
+          </div>   
+
+         </div>
+
+        </div>
+
+         <!-- 9列的页面主内容 -->
+        <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+
+          <!-- 某一诊断的具体描述 -->
+          <div class="mdl-cell mdl-cell--6-col">
+           
+              <!-- 诊断详情-->
+              <div class="dgevidence" style="height:450px;border:2px solid  lightgrey;overflow:auto;">
+                <div class="showtables" style="height:420px;"> 
+                  <div class="evititle" style="height:48px;padding:2px;">
+                    <div style="width:29%;float:left;margin-top:2px;margin-left:2px;">
+                      <label style="width:60%;font-size:1.6em;color:black;font-weight:bold;">血管瘤</label>
+                      <label style="width:39%;font-size:1.6em;color:black;font-weight:bold;">58%</label>
+                    </div>
+                    <div style="width:40%;float:left;">
+                      &nbsp;
+                    </div>
+                    <div style="width:30%;float:left;">
+                      
+                      <span>
+                        <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored evibutton">
+                          疾病描述
+                        </button>
+                      </span>
+                      <span>
+                        <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored evibutton">
+                          疾病百科
+                        </button>
+                      </span>
+                      </div>
+
+                  </div>
+                  
+                  <div class="checktable" style="height:370px;">
+                    <div style="width:30%;height:30px;margin-top:5px;margin-left:4px;border-bottom:1px solid black;">
+                      <span style="font-size:1.3em;color:black;font-weight:bold;float:left">诊断依据</span>
+                      <span style="float:left">&nbsp;</span>
+                      <a class=""><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                    </div>
+                    <div class="evitable1 " >
+                      <div id="checklabel" style="text-align:center;">
+                        <label style="font-size:15px;color:#3f51b5;font-weight:bold;">检查指标</label>
+                      </div>
+                      <div id="detailtable1" style="margin-top:4px;">
+                        <table class="centered" id="hasborder" style="width:100%;">
+                          <thead>
+                            <tr>
+                                <th class="checkthead">指标</th>
+                                <th class="checkthead">数值</th>
+                                <th class="checkthead">参考值</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>癌胚抗原</td>
+                              <td>20mg/ml</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="evitable2  " >
+                      <div id="checklabel" style="text-align:center;">
+                        <label style="font-size:15px;color:#3f51b5;font-weight:bold;">历史病历</label>
+                      </div>
+                      <div id="detailtable2" style="margin-top:4px;">
+                        <table class="centered" id="hasborder" style="width:99%;">
+                          <thead>
+                            <tr>
+                                <th class="checkthead">类型</th>
+                                <th class="checkthead">详细数值</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>家族病史</td>
+                              <td>肝炎</td>
+                              
+                            </tr>
+                            <tr>
+                              <td>既往病史</td>
+                              <td>肝炎</td>
+                              
+                            </tr>
+                            <tr>
+                              <td>XX</td>
+                              <td>XXX</td>
+                            
+                            </tr>
+                            <tr>
+                              <td>XX</td>
+                              <td>&nbsp;</td>
+                              
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="checkrecommend"  style="margin-top:20px;"> 
+                    <div class="rectitle" style="height:30px;">
+                      <div style="width:37%;float:left;margin-top:2px;margin-left:2px;border-bottom:1px solid black;">
+                          <span style="float:left;font-size:1.3em;color:black;font-weight:bold;">检查项目推荐</span>
+                          <span style="float:left">&nbsp;</span>
+                          <a class=""><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                      </div>
+                      <div style="width:42%;float:left;">
+                        &nbsp;
+                      </div>
+                      
+                    </div>
+
+                    <div id="chooseitems" style="margin-top:5px;margin-bottom:5px;">
+                      <span style="margin-left: 5px;width:100px;font-size:12px;"> 
+                      <input type="checkbox" class="filled-in" name="selector" id="1" >
+                      <label for="1">检查项目一</label>
+                      </span>
+                      <span style="margin-left: 5px;width:100px;">
+                      <input type="checkbox" class="filled-in" name="selector" id="2" >
+                      <label for="2">检查项目二</label>
+                      </span>
+                    
+                      <span style="margin-left: 5px;width:100px;">
+                      <input  type="checkbox" class="filled-in" name="selector" id="3" >
+                      <label for="3" style="font-size:14px;">检查项目三</label>
+                      </span>
+                    
+                      <span style="margin-left: 5px;width:100px;">
+                      <input type="checkbox" class="filled-in" name="selector" id="4" >
+                      <label for="4">检查项目四</label>
+                      </span>
+                      <span style="margin-left: 5px;width:100px;">
+                      <input type="checkbox" class="filled-in" name="selector" id="5" >
+                      <label for="5">检查项目五</label>
+                      </span>
+                      
+                    </div>
+
+                    <div style="margin-top:5px;margin-bottom:5px;height:30px;">
+                     <!--  按钮后面要改成搜索框，根据用户输入自动补全内容（从传入的数据中匹配），然后点击添加按钮后添加新的复选框-->
+                      <div style="float:left;margin-left:5px;"> 
+                        
+                        <input style="height:25px;margin-bottom:0px;" type="text" id="inputitem" value="输入增加指标">
+                      </div>
+
+                      <button style="float:left;margin-left:5px;" class="additem mdl-button mdl-js-button mdl-button--fab">+</button>
+                      <!-- 确认后将选中的复选框中说明文字传给服务器 -->
+                      <div style="float:right;margin-right:10px;"> 
+                        <button  class="mdl-button mdl-js-button mdl-button--raised admitbutton" id="admitcheck">
+                              确认
+                        </button>
+                      </div>
+                      <div style="float:right;margin-right:5px;">
+
+                        <input type="checkbox" class="filled-in chooseall" id="testall" >
+                        <label for="testall">全选</label>
+                      </div>
+                    </div>
+                    
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- 诊断项目推荐 -->
+              
+              <!-- 诊断反馈 
+              <div class="dgfeedback" style="height:90px;border:2px solid lightgrey;">
+                <div class="feedtitle" style="height:30px;margin:2px 0 0 2px;">
+                  <label style="font-size:20px;color:black;font-weight:bold;border-bottom:1px solid black;">反馈</label>
+                  <span>（诊断结果是否有帮助？）</span>
+                </div>
+                <div >
+                  <button style="margin-left:25%;" class="mdl-button mdl-js-button mdl-button--raised feedbutton">
+                        是
+                  </button>
+                  <button  style="float:right;margin-right:25%;" class="mdl-button mdl-js-button mdl-button--raised feedbutton">
+                        否
+                  </button>
+                </div>
+
+              </div>
+              -->
+
+          </div>
+
+
+
+          <div  id="changebg" class="mdl-cell mdl-cell--3-col" style="height:300px;float:left;border:2px solid #3f51b5">
+            <p id="hidetest">如果您点击我，我会消失。</p>
+            <button id="hide" type="button">隐藏再显示</button>
+            <button id="show" type="button">显示</button>
+            <span><input type="text" id="test" value="添加项目"></span>
+            <button id="alertbutt">显示值</button>
+          </div>
+          
+          
+        </div>
+     
+      </div>
+    </div>
+  </main>
+  
+  
+</div>
+
+
+
+
+</body>
+</html>
