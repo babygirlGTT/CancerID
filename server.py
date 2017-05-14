@@ -7,6 +7,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
+import json
 from tornado import gen
 import pymongo
 from pymongo import MongoClient
@@ -27,12 +28,23 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.db_client.doctor.doctorinfo.find_one({"id":user_id})
 
 class MainHandler(BaseHandler):
+
+    def get_patient_info(self, patient_ids):
+        '''病人简要信息'''
+        items = []
+        for patient_id in patient_ids:
+            info = self.db_client.patients.patient_info.find_one({"p_id":patient_id})
+            items.append(info)
+        return items
+
+
     @tornado.web.authenticated
     def get(self):
         # name = tornado.escape.xhtml_escape(self.current_user)
         # self.write("Hello, " + name)
         user = self.get_current_user()
-        self.render("Modules/index.html", user=user)
+        patients = self.get_patient_info(user["patients"])
+        self.render("Modules/index.html", user=user, patients=patients)
 
 class LoginHandler(BaseHandler):
     def get(self):
@@ -57,26 +69,35 @@ class LogoutHandler(BaseHandler):
         self.redirect(self.get_argument("next","/"))
 
 class DiagHandler(BaseHandler):
-    def get_patient_info(self):
+    def get_patient_info(self, patient_id):
         '''病人简要信息'''
-        pass
+        items = self.db_client.patients.patient_info.find_one({"p_id":patient_id})
+        return items
 
-    def get_diag_results(self):
+    def get_diag_results(self, patient_id):
         '''诊断结果'''
-        pass
+        items = self.db_client.diagnosis.results.find_one({"p_id":patient_id})
+        return items
 
-    def get_diag_evidence(self):
+    def get_diag_evidence(self, patient_id):
         '''诊断依据'''
         pass
 
-    def get_recom_items(self):
+    def get_recom_items(self, patient_id):
         '''推荐项目'''
-        pass
+        items = self.db_client.diagnosis.recommend.find_one({"p_id":patient_id})
+        return items
 
     @tornado.web.authenticated
-    def get(self):
+    def get(self, input):
+        p_id = input
+        print p_id
         user = self.get_current_user()
-        self.render("Modules/test.html", user=user)
+        print user
+        recommend = self.get_recom_items(p_id)
+        diag = self.get_diag_results(p_id)
+        info = self.get_patient_info(p_id)
+        self.render("Modules/test.html", user=user, recommend=recommend, diag=diag, info=info)
 
 class Application(tornado.web.Application):
     '''define application'''
@@ -84,6 +105,7 @@ class Application(tornado.web.Application):
         handlers = [(r"/", MainHandler),
                     (r"/login", LoginHandler),
                     (r"/logout", LogoutHandler),
+                    (r"/diagnosis/(\w+)", DiagHandler),
                     (r"/diagnosis", DiagHandler),]
 
         settings = dict(

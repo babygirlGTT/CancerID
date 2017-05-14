@@ -2,7 +2,6 @@
 import pymongo
 import fire
 from pymongo import MongoClient
-from sklearn import 
 import lda
 """training, from documents to a model."""
 # save model

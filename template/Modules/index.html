@@ -50,7 +50,7 @@
 
       <div class="row">
         <!-- 左边的3列内容 -->
-        <div class="col s3" style="padding-top:8px;">
+        <div class="col s12 l3" style="padding-top:8px;">
           
   
          <!-- 病历查看 -->
@@ -62,61 +62,18 @@
            </div>
            <!-- 下拉菜单列表-->
            <div class="bin-list" style="margin:0px;overflow:auto">
-              <div class="subNav  currentDd currentDt">
-               001 张朝健
+               {% for patient in patients %}
+              <div class="subNav">
+                  {{ escape(patient["p_id"]) }}
+                  {{ escape(patient["name"]) }}
               </div>
               <ul class="navContent" style="display:block;">
 
-                	<li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
+                	<li class="lsitem"><a href="#">历史病历</a></li>
                 	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
 
               </ul>
-              <div class="subNav">
-                002 张建聪</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-
-              </ul>
-              <div class="subNav">003 姚望</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-              </ul>
-              <div class="subNav">004 郑炜</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-              </ul>
-              <div class="subNav">005 武奕</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-              </ul>
-              <div class="subNav">006 姚纯然</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-              </ul>
-              <div class="subNav">007 杨羽茜</div>
-              <ul class="navContent">
-                  <li class="lsitem"><a href="#">门诊病历</a></li>
-                	<li class="lsitem"><a href="#">处方</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
-                	<li class="lsitem"><a href="#">处置单</a></li>
-              </ul>
+              {% end %}
            </div>
           
              
@@ -125,9 +82,10 @@
 
 
          <!-- 右边的页面主内容 -->
-        <div class="col s3">
+        <div class="col s12 l9 row">
           <!-- 第一个3列-->
-          <div >
+          {% for patient in patients %}
+          <div class="col l3">
             <div class="card mycard">
                   <div class="card-content black-text" style="padding:6px;">
                   
@@ -135,34 +93,30 @@
                       <tbody>
                         <tr>
                           <td class="tdlabel">编号:</td>
-                          <td class="tdcontents">001</td>
+                          <td class="tdcontents">{{ escape(patient["p_id"]) }}</td>
                         </tr>
                         <tr>
                           <td class="tdlabel">姓名:</td>
-                          <td class="tdcontents">张朝健</td>
-                        </tr>
-                        <tr>
-                          <td class="tdlabel">年龄:</td>
-                          <td class="tdcontents">30</td>
+                          <td class="tdcontents">{{ escape(patient["name"]) }}</td>
                         </tr>
                         <tr>
                           <td class="tdlabel">性别:</td>
-                          <td class="tdcontents">男</td>            
+                          <td class="tdcontents">{{ escape(patient["gender"]) }}</td>
                         </tr>
                         <tr>
                           <td class="tdlabel">诊断结果:</td>
-                          <td class="tdcontents">XXX</td>           
+                          <td class="tdcontents">无</td>           
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div class="card-action mine-card-action" style="text-align:center;padding:4px;">
-                    <a  id="bluelink"  href="/diagnosis">查看详情</a>
+                    <a  id="bluelink"  href="/diagnosis/{{ escape(patient["p_id"]) }}">查看更多</a>
                   </div>
                 </div>
             
             </div>
-             
+            {% end %}
              <!-- 医生账户信息 
             <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
               <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
@@ -218,7 +172,8 @@
   </div>
     <script src="{{ static_url("js/material.min.js") }}"></script>
     <script src="{{ static_url("js/materialize.min.js")}}"></script>
-    <script src="{{ static_url("js/jquery-1.3.2.js")}}"></script>
+    <script src="{{ static_url("js/jquery-1.9.0.min.js")}}"></script>
+    <!--<script src="{{ static_url("js/jquery-1.3.2.js")}}"></script>-->
   <script type="text/javascript">
   $(function(){
   $(".subNav").click(function(){
