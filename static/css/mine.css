@@ -119,22 +119,22 @@ td.tdcontents{
     border:none;
 }
 td.dgcontents{
-    text-indent: 10px;
+    text-indent: 5px;
     text-align:left;
-    letter-spacing:2px;
+    letter-spacing:1px;
     width:45%;
     border:none;
 }
 td.dgrate{
     text-align:center;
     letter-spacing:2px;
-    width:40%;
+    width:35%;
     border:none;
 }
 td.dgcheck{
     text-align:center;
     border:none;
-    width:15%;
+    width:20%;
 }
 
 .patdetails{
@@ -143,14 +143,14 @@ td.dgcheck{
 
 /*文字居中的按钮*/
 .dgbutton{
-font-size:15px;
+font-size:14px;
  text-align:center;
  padding:0px;
  vertical-align:text-top ;
  line-height:25px;
  margin:0px; 
- Height:27px;
- Width:100px;
+ Height:24px;
+ Width:80px;
 }
 
 .evibutton{
@@ -166,7 +166,7 @@ font-size:15px;
  
 }
 
-.mybutton{
+.emrbutton{
  font-size:12px;
  text-align:center;
  padding:0px;

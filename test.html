@@ -52,6 +52,7 @@
 
       <div class="mdl-grid">
         <!-- 左边的小列内容 -->
+        <div style="width:4%"></div>
         <div class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--8-col-tablet">
           
           <!-- 病人基本信息 -->
@@ -71,7 +72,7 @@
                       </tr>
                       <tr>
                         <td class="tdlabel">姓名:</td>
-                        <td class="tdcontents">张朝健</td>
+                        <td class="tdcontents" id="patname">张朝健</td>
                       </tr>
                       <tr>
                         <td class="tdlabel">年龄:</td>
@@ -86,7 +87,7 @@
                   </table>
               </div>
               <div style="text-align:center;height:24px;margin-top:10px;">
-                <button  class="mdl-button mdl-js-button mdl-button--raised mybutton">
+                <button  class="mdl-button mdl-js-button mdl-button--raised emrbutton">
                   查看病历详情
                 </button>
               </div>    
@@ -96,70 +97,68 @@
          
 
          <!-- 诊断结果box -->
-         <div id="diagnosebox" style="margin-top:10px;display:block; height:260px;border:2px solid #3f51b5;">
+         <div id="diagnosebox" style="margin-top:10px;display:block; height:300px;border:2px solid #3f51b5;">
            <div id="diagtitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
               <label style="font-size:18px;color:aliceblue">
               <b>诊断结果</b>
               </label>
            </div>
           
-           <div  style="margin:3px 2px 8px 0px;float:right;"><span>勾选以进行对比</span>
+           <div  style="margin:3px 2px 8px 0px;float:left;">
+             <span style="width:65%;">疾病名称</span>
+             <span style="width:25%;">概率</span>
+             <span style="width:35%;">勾选对比</span>
            </div>
 
           
-          <div style="clear:both;width:100%;height:155px;margin:0px;overflow-y:auto">
-          <table class="noborder" style="clear:both;width:100%;">
-            <tbody>
-              <tr>
-                <td class="dgcontents">血管瘤</td>
-                <td class="dgrate">58%</td>
-                <td class="dgcheck">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
-                    <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" />
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td class="dgcontents">脂肪瘤</td>
-                <td class="dgrate">49%</td>
-                <td class="dgcheck">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-2">
-                    <input type="checkbox" id="list-checkbox-2" class="mdl-checkbox__input" />
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td class="dgcontents">胰岛细胞瘤</td>
-                <td class="dgrate">36%</td>
-                <td class="dgcheck">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-3">
-                    <input type="checkbox" id="list-checkbox-3" class="mdl-checkbox__input" />
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td class="dgcontents">平滑肌瘤</td>
-                <td class="dgrate">30%</td>
-                <td class="dgcheck">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-4">
-                    <input type="checkbox" id="list-checkbox-4" class="mdl-checkbox__input" />
-                  </label>
-                </td>            
-              </tr>
-              <tr>
-                <td class="dgcontents">脑肿瘤</td>
-                <td class="dgrate">30%</td>
-                <td class="dgcheck">
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-5" >
-                    <input type="checkbox" id="list-checkbox-5" class="mdl-checkbox__input" />
-                  </label>
-                </td>           
-              </tr>
-            </tbody>
-          </table>        
+          <div id="tablediv" style="clear:both;width:100%;height:200px;margin:0px;overflow-y:auto">
+            <table class="noborder" style="clear:both;width:100%;">
+              <tbody id="dgtable">
+                <tr class="dgtr">
+                  <td class="dgcontents">血管瘤</td>
+                  <td class="dgrate">58%</td>
+                  <td class="dgcheck">
+                    <input type="checkbox" class="filled-in onedisease" name="selector" id="dgid[0]" >
+                    <label for="dgid[0]"></label>
+                  </td>
+                </tr>
+                <tr class="dgtr"> 
+                  <td class="dgcontents">脂肪瘤</td>
+                  <td class="dgrate">49%</td>
+                  <td class="dgcheck">
+                    <input type="checkbox" class="filled-in onedisease" name="selector" id="dgid[1]" >
+                    <label for="dgid[1]"></label>
+                  </td>
+                </tr>
+                <tr class="dgtr">
+                  <td class="dgcontents">胰岛细胞瘤</td>
+                  <td class="dgrate">36%</td>
+                  <td class="dgcheck">
+                    <input type="checkbox" class="filled-in onedisease" name="selector" id="dgid[2]" >
+                    <label for="dgid[2]"></label>
+                  </td>
+                </tr>
+                <tr class="dgtr">
+                  <td class="dgcontents">平滑肌瘤</td>
+                  <td class="dgrate">30%</td>
+                  <td class="dgcheck">
+                    <input type="checkbox" class="filled-in onedisease" name="selector" id="dgid[3]" >
+                    <label for="dgid[3]"></label>
+                  </td>            
+                </tr>
+                <tr class="dgtr">
+                  <td class="dgcontents">脑肿瘤</td>
+                  <td class="dgrate">30%</td>
+                  <td class="dgcheck">
+                    <input type="checkbox" class="filled-in onedisease" name="selector" id="dgid[4]" >
+                    <label for="dgid[4]"></label>
+                  </td>           
+                </tr>
+              </tbody>
+            </table>        
           </div>
           <div style="text-align:center;height:28px;">
-            <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised dgbutton">
+            <button  class="mdl-button mdl-js-button mdl-button--raised dgbutton">
               查看更多
             </button>
           </div>   
@@ -169,23 +168,23 @@
         </div>
 
          <!-- 9列的页面主内容 -->
-        <div class="mdl-grid mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+        <div  id="mostpage" class="mdl-grid mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
 
           <!-- 某一诊断的具体描述 -->
-          <div class="mdl-cell mdl-cell--6-col">
+          <div  id="firstpage" class="mdl-cell mdl-cell--12-col">
            
               <!-- 诊断详情-->
               <div class="dgevidence" style="height:450px;border:2px solid  lightgrey;overflow:auto;">
                 <div class="showtables" style="height:420px;"> 
                   <div class="evititle" style="height:48px;padding:2px;">
                     <div style="width:29%;float:left;margin-top:2px;margin-left:2px;">
-                      <label style="width:60%;font-size:1.6em;color:black;font-weight:bold;">血管瘤</label>
-                      <label style="width:39%;font-size:1.6em;color:black;font-weight:bold;">58%</label>
+                      <label class="thedisease" style="width:60%;font-size:1.6em;color:black;font-weight:bold;">血管瘤</label>
+                      <label class="showrate" style="width:39%;font-size:1.6em;color:black;font-weight:bold;">58%</label>
                     </div>
                     <div style="width:40%;float:left;">
                       &nbsp;
                     </div>
-                    <div style="width:30%;float:left;">
+                    <div style="width:30%;float:right;">
                       
                       <span>
                         <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored evibutton">
@@ -375,14 +374,8 @@
 
           </div>
 
-
-
-          <div  id="changebg" class="mdl-cell mdl-cell--3-col" style="height:300px;float:left;border:2px solid #3f51b5">
-            <p id="hidetest">如果您点击我，我会消失。</p>
-            <button id="hide" type="button">隐藏再显示</button>
-            <button id="show" type="button">显示</button>
-            <span><input type="text" id="test" value="添加项目"></span>
-            <button id="alertbutt">显示值</button>
+          <div  id="secondpage" class="mdl-cell mdl-cell--0-col" style="height:450px;float:left;border:2px solid #3f51b5">
+            
           </div>
           
           
