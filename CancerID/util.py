@@ -5,9 +5,37 @@ cancerID.utils
 Helper functions used throughout CancerID.
 """
 from sklearn.feature_extraction.text import CountVectorizer
+import pymongo
 from pymongo import MongoClient
 import lda
 import fire
+
+class Database(object):
+
+    def __init__(self):
+        self.db_client = MongoClient()
+
+    def get_doctor_info(self, doctor_id):
+        doctor_db = self.db_client.get_database("doctor")
+        coll = doctor_db.get_collection("doctorinfo")
+        return coll.find_one({"id":doctor_id})
+
+class Knowledgebase(object):
+
+    def __init__(self):
+        self.db_client = MongoClient()
+
+    def get_knowledge(self):
+        knowledge_db = self.db_client.get_database("knowledge")
+        return knowledge_db
+
+    def get_features(self, disease_id):
+        'the type of disease is a string'
+        db = self.get_knowledge()
+        coll = db.get_collection(disease_id)
+        latest_record = coll.find_one({}).sort("_id", pymongo.DESCENDING).limit(1)
+        return latest_record['items']
+
 def extract_data(patient_id = "all"):
     #mongodb中抽取数据形成文档存储
     client = MongoClient()

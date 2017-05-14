@@ -6,11 +6,12 @@ MODEL_UPDATE_PERIOD = 1 #day
 def job1():
     print("I'm working on job1...")
 
-def job2()：
+def job2():
     print("I'm working on job2...")
-schedule.every(EXTRACT_PERIOD).seconds.do(job)
+
+schedule.every(EXTRACT_PERIOD).seconds.do(job1)
 # schedule.every().day("10:30").do(job)
-schedule.every(MODEL_UPDATE_PERIOD).day().do(job)
+schedule.every(MODEL_UPDATE_PERIOD).day.do(job2)
 
 while 1:
     schedule.run_pending()

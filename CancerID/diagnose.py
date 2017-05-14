@@ -5,10 +5,11 @@ from pymongo import MongoClient
 from sklearn import 
 """diagnose, from a document to a result."""
 
-def extract_data(patient_id):
+def load_data():
     #mongodb中抽取数据形成文档存储
     client = MongoClient()
-    coll = client.diagnosis.documents
+    coll = client.diagnosis
+    return coll.find()
 
 
 dis = ["0001","0002","0003","0004","0005","0006"]
@@ -16,10 +17,6 @@ dis = ["0001","0002","0003","0004","0005","0006"]
 def load_model(path):
     pass
     return y
-
-def load_data(path):
-    pass
-    return x
 
 def predict(self, dis_list):
 
