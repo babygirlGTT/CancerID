@@ -17,17 +17,22 @@ def main():
         p_icd = {}
         for line in diag_icd.find():
             icd9 = line['ICD9_CODE']
-            if icd9 in icd_dic:
-                p_icd[icd_dic[icd9]].add(line['SUBJECT_ID'])
-            else:
-                icd_dic[icd9] = icd_id
-                p_icd[icd_dic[icd9]] = set([line['SUBJECT_ID']])
-                icd_id += 1
+            if icd9:
+                if icd9 in icd_dic:
+                    p_icd[icd_dic[icd9]].add(line['SUBJECT_ID'])
+                else:
+                    icd_dic[icd9] = icd_id
+                    p_icd[icd_dic[icd9]] = set([line['SUBJECT_ID']])
+                    icd_id += 1
         #print p_icd
-                    
+        n = 3
         for icd in p_icd:
             for p in p_icd[icd]:
                 icd_ls.append({'icd_id':icd, 'SUBJECT_ID':p})
+            n -= 1
+            if n <= 0:
+                break
+        print icd_ls
         print len(icd_ls)
         icd_ls.sort(key = lambda x: x['icd_id'])
         for icd in icd_ls:
@@ -53,9 +58,9 @@ def main():
                         else:
                             tf_part[term] = [tf_all[term], 1]
                     else:
-                        term_id += 1
                         tf_all[term] = term_id
                         tf_part[term] = [term_id, 1]
+                        term_id += 1
             tf_ls = []
             for k in tf_part:
                 tf_ls.append({'id':tf_part[k][0], 'tf':tf_part[k][1], 'word':k})

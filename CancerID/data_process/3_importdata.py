@@ -7,7 +7,7 @@ import pymongo
 conn = pymongo.MongoClient()
 db = conn.mimic
 
-with open('/home/zn/Desktop/ca_pt_id.txt', 'rb') as f:  #打开文件，确定筛选条件
+with open('/home/zn/Desktop/data/ca_pt_id.txt', 'rb') as f:  #打开文件，确定筛选条件
     lines = f.readlines()
     lines = {line.strip() for line in lines}
 
@@ -33,8 +33,12 @@ def importdata(table, path, col_ls):
                     subid = row['SUBJECT_ID']
 
 def main():
+    diag = db.DIAGNOSES_ICD
+    path = '/home/zn/Documents/mimic/DIAGNOSES_ICD_DATA_TABLE.csv'
+    col_ls = ["SUBJECT_ID","HADM_ID","SEQ_NUM","ICD9_CODE"]
+    importdata(diag, path, col_ls)
     #导入表ADMISSIONS
-    admi = db.ADMISSIONS
+    '''admi = db.ADMISSIONS
     path = '/home/zn/Documents/MIMIC/ADMISSIONS_DATA_TABLE.csv'
     col_ls = ["SUBJECT_ID","HADM_ID","ADMITTIME","DISCHTIME","DEATHTIME","ADMISSION_TYPE","ADMISSION_LOCATION","DISCHARGE_LOCATION","INSURANCE","LANGUAGE","RELIGION","MARITAL_STATUS","ETHNICITY","EDREGTIME","EDOUTTIME","DIAGNOSIS","HOSPITAL_EXPIRE_FLAG","HAS_IOEVENTS_DATA","HAS_CHARTEVENTS_DATA"]
     importdata(admi, path, col_ls)
@@ -145,7 +149,7 @@ def main():
     transfer = db.TRANSFERS
     path = '/home/zn/Documents/MIMIC/TRANSFERS_DATA_TABLE.csv'
     col_ls = ["SUBJECT_ID","HADM_ID","ICUSTAY_ID","DBSOURCE","EVENTTYPE","PREV_CAREUNIT","CURR_CAREUNIT","PREV_WARDID","CURR_WARDID","INTIME","OUTTIME","LOS"]
-    importdata(transfer, path, col_ls)
+    importdata(transfer, path, col_ls)'''
 
 if __name__ == '__main__':
     main()

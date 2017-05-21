@@ -27,7 +27,7 @@ def doc_gen(docs, tin, titles, flag=''):
         n = 0
         ts = time.time()
         for ti in cursor:
-            docs[ti['SUBJECT_ID']] = docs[ti['SUBJECT_ID']] + ' ' + intvl_word(ti[titles[0]], ti[titles[1]], ti[flag])
+            docs[ti['SUBJECT_ID']] = docs[ti['SUBJECT_ID']] + '\t' + intvl_word(ti[titles[0]], ti[titles[1]], ti[flag])
             count +=1
             if count%1000000 == 0:
                 n +=1
@@ -39,7 +39,7 @@ def doc_gen(docs, tin, titles, flag=''):
         if docs:
             for ti in tin.find():
                 for title in titles:
-                    docs[ti['SUBJECT_ID']] = docs[ti['SUBJECT_ID']] + ' ' + ti[title]
+                    docs[ti['SUBJECT_ID']] = docs[ti['SUBJECT_ID']] + '\t' + ti[title]
         else:
             for ti in tin.find():
                 doc = ''
@@ -71,6 +71,9 @@ def main():
     oute = mimic.OUTPUTEVENTS
     titles = ['ITEMID', 'VALUE']
     docs = doc_gen(docs, oute, titles, 'VALUE')
+    print docs['73397']
+    with open('/home/zn/Desktop/doc.json', 'wb') as f:
+        json.dump(docs, f)
     e = time.time()
     print e-s
 
