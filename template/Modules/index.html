@@ -7,50 +7,31 @@
         <link href="{{ static_url("css/materialize.min.css")}}" rel="stylesheet" type="text/css"/>
         <link href="{{ static_url("css/mine.css")}}" rel="stylesheet" type="text/css" >
   </head>
-
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <!-- Top row, always visible -->
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">
-        <br>
-        <big>癌症辅助诊断系统</big><br>
-        <big>CancerID</big>
-      </span>
-      <div class="mdl-layout-spacer"></div>
-      <div align="right">
+<nav>
+  <div class="nav-wrapper indigo">
+    <a href="/" class="brand-logo">CancerID</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="">病人信息</a></li>
+      <li><a href="">医学数据库</a></li>
+      <li><a href="">疾病百科</a></li>
            {% if current_user %}
-       <span>当前用户:</span>
-           <span>{{user["name"]}}</span>
-       <span>&nbsp;&nbsp;&nbsp;</span>
+      <li><a href="">医生:{{user["name"]}}</a></li>
            {% end %}
-       <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-          <a href="/logout">退出</a> 
-       </button>
-        
-      </div>
-    </div>
-    <!-- Bottom row, not visible on scroll -->
-      
-      <!-- Navigation -->
-      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-        <span style="width:400px;"></span>
-        <div align="left">
-        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">病人信息</a>
-        <a href="#scroll-tab-2" class="mdl-layout__tab">医学文献</a>
-        <a href="#scroll-tab-3" class="mdl-layout__tab">疾病百科</a>
-        </div>
-      </div>
-  </header>
 
+      <li><a href="/logout">退出</a></li>
+    </ul>
+  </div>
+</nav>
+    <!-- Bottom row, not visible on scroll -->
+ <div class="divider"></div>
+  <div class="section">
   <main class="mdl-layout__content">
     <div class="page-content"><!-- Your content goes here -->
 
       <div class="row">
         <!-- 左边的3列内容 -->
-        <div class="col s12 l3" style="padding-top:8px;">
+        <div class="col s12 m6 l3" style="padding-top:8px;">
           
   
          <!-- 病历查看 -->
@@ -82,10 +63,10 @@
 
 
          <!-- 右边的页面主内容 -->
-        <div class="col s12 l9 row">
+        <div class="col s12 m6 l9 row">
           <!-- 第一个3列-->
           {% for patient in patients %}
-          <div class="col l3">
+          <div class="col s12 m6 l3 ">
             <div class="card mycard">
                   <div class="card-content black-text" style="padding:6px;">
                   

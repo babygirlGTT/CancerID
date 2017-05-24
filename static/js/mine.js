@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 
 //查看病历详情按钮
-    $(".emrbutton").click(function(){
+    $(".summary").click(function(){
         var patient = $("#patname").text();
         alert(patient);
     });
@@ -35,16 +35,12 @@ $(document).ready(function(){
      ////靠获取最后一个input元素中的id值更新id值
      //读取输入框中的检查项目
         var usrinput = $("#inputitem").val();
-        alert(usrinput);
 
        var idvalue = $("#chooseitems").children("span:last-child").children("input").attr("id");
-       
-
        var num = Number(idvalue);
        var id = num +1;
-
         //靠获取点击次数更新id值,标志一共点击的次数
-        //arguments.callee.num = arguments.callee.num ? arguments.callee.num : 0;
+        //arguments.callee.num = arguments.输入增加指标输入增加指标callee.num ? arguments.callee.num : 0;
         // var id = (++arguments.callee.num)+5;
 
         var itemaid = id.toString();
@@ -60,10 +56,6 @@ $(document).ready(function(){
 //获取到tr同胞元素中 被选中的疾病的数量，如果其同胞都没有选中，则此疾病的布局占全屏，如果只有一个同胞被选中，则布局占一半
 //多于1个的同胞，则alert出提示信息
     $("#dgtable").on("click", ".onedisease", function(){
-        //alert("hello");
-        var flag = $(this).prop("checked");
-        var disease = $(this).parent().siblings(".dgcontents").text();
-        var rate = $(this).parent().siblings(".dgrate").text();
         var chkdis = 0;//点击过后，一共有几个被选中
         var chkall = [];
         $("#dgtable").find("input").each(function(){ 
@@ -79,25 +71,23 @@ $(document).ready(function(){
         switch(chkdis)
         {
         case 0:
-            alert("没有选择");
             break;
         case 1:
-            alert("hello");
-            $($("#mostpage").children("div").get(0)).attr("class","mdl-cell mdl-cell--12-col");
+            $($("#mostpage").children("div").get(0)).attr("class","col l12");
             $($("#mostpage").children("div").get(1)).hide();
             break;
         case 2:
-            alert("hello again");
-            $($("#mostpage").children("div").get(0)).attr("class","mdl-cell mdl-cell--6-col");
-            $($("#mostpage").children("div").get(1)).attr("class","mdl-cell mdl-cell--6-col");
+            $($("#mostpage").children("div").get(0)).attr("class","col l6");
+            $($("#mostpage").children("div").get(1)).attr("class","col l6");
              $($("#mostpage").children("div").get(1)).show();
             break;
         default:
-            alert("请最多选择两项对比");
+            $(this).prop("checked","");
         }
 
-        
-        
+        var flag = $(this).prop("checked");
+        var disease = $(this).parent().siblings(".dgcontents").text();
+        var rate = $(this).parent().siblings(".dgrate").text();
         //被选中的疾病传回名称和概率等数据，对标签内容进行修改
         if (flag){            
             
@@ -121,21 +111,8 @@ $(document).ready(function(){
     //问题：checkbox的id问题，html代码不能只是简单的复制
 
     //查看更多结果的按钮，要从数据文件中读取诊断列表，再分别设置到每个tr的内容中去，在添加至网页
-    $(".dgbutton").on("click",function(){
-        var diseaselist  = ['肝脏','心脏','大脑'];
-        var ratelist  = ['33%','44%','55%'];
-        var n = 5;
-        for (var i=0;i<diseaselist.length;i++){
-            var anothertr = "<tr class='dgtr'><td class='dgcontents'>"+diseaselist[i]+"</td><td class='dgrate'>"
-                +ratelist[i]+"</td><td class='dgcheck'>"+
-                "<input type='checkbox' class='filled-in onedisease' name='selector' id='dgid["+(i+n)+
-                "]'><label for='dgid["+(i+n)+"]'></label></td></tr>" ;
-            $("#dgtable").append(anothertr);
-        }
-            
-            //var boxhtml = $("#dgtable").html();
-            //$("#changebg").toggle();;
-            //$("#dgtable").append(boxhtml);
+    $(".more").on("click",function(){
+        $(".dgtr").css("display","");
     });
 
 
