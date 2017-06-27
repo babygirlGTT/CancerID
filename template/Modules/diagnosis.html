@@ -9,22 +9,22 @@
   </head>
 
 <body>
-<nav>
-  <div class="nav-wrapper indigo">
-    <a href="/" class="brand-logo">CancerID</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="">病人信息</a></li>
-      <li><a href="">医学数据库</a></li>
-      <li><a href="">疾病百科</a></li>
-           {% if current_user %}
-      <li><a href="">医生:{{user["name"]}}</a></li>
-           {% end %}
+  <nav>
+    <div class="nav-wrapper indigo">
+      <a href="/" class="brand-logo">CancerID</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="">病人信息</a></li>
+        <li><a href="">医学数据库</a></li>
+        <li><a href="">疾病百科</a></li>
+            {% if current_user %}
+        <li><a href="">医生:{{user["name"]}}</a></li>
+            {% end %}
 
-      <li><a href="/logout">退出</a></li>
-    </ul>
-  </div>
-</nav>
-<div class="divider"></div>
+        <li><a href="/logout">退出</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="section">
 
       <div class="row">
@@ -84,6 +84,7 @@
               <b>诊断结果</b>
               </label>
            </div>
+          
           
           <div id="tablediv container" style="clear:both;width:100%;height:100%;margin:0px;overflow-y:auto">
             <table class="noborder" style="clear:both;width:100%;">

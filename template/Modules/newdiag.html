@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+<title>诊断信息界面</title>
+
+<link href="{{ static_url("css/materialize.min.css")}}" rel="stylesheet" type="text/css"/>
+<link href="{{ static_url("css/mine.css")}}" rel="stylesheet" type="text/css" >
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-wrapper row" style="background-color:#0767c8">
+      <a  style="margin-left:20px;" href="/" class="brand-logo left col s1 m2 l3">CancerID</a>
+
+      <ul style="height:60px;" class="col s5 m6 l6 offset-l3 offset-m2 offset-s1">
+        <li class="active"><a class="navlink" href="/">病人信息</a></li>
+        <li><a class="navlink" href="http://wikidi.com/category/disease-or-medical-condition" target="_blank">疾病百科</a></li>
+        <li><a class="navlink" href="https://www.ncbi.nlm.nih.gov/pubmed" target="_blank">医学数据库</a></li>
+        
+      </ul>
+
+      <div class="col s6 m4 l3">
+        <span >当前用户:</span>
+        {% if current_user %}
+        <span  id="adminuser">{{user["name"]}}</span>
+        {% end %}
+        <span style="width: 3px;">&nbsp;</span>
+        <span>
+          <a href="/logout">
+          <button  class="waves-effect waves-light btn blue quitbutton">退出</button>
+          </a>
+        </span>
+      </div>
+    </div>
+  </nav>
+ <div class="divider"></div>
+  
+ 
+
+  <div class="row" style="margin-top: 20px;">
+        <!-- 左边的小列内容 -->
+        <div class="col s12 m3 l3">
+          
+          <!-- 病人基本信息box -->
+          <div id="infobox" style="margin:0px;display:block; height:170px;border:2px solid #0767c8;">
+            <div id="basictitle" style="height:27px;background-color:#0767c8;font-size:18px;text-align:center;color:aliceblue">
+              <label style="font-size:18px;color:aliceblue">
+              <b>基本信息</b>
+              </label>
+            </div>
+
+            <div class="basictext">
+              <div class="patinfobox">
+                  <table class="tdcentered" style="margin-top:10px;">
+                    {% if info %}
+                    <tbody>
+                      <tr>
+                        <td class="tdlabel">编号:</td>
+                        <td class="tdcontents" name ="p_id">{{escape(info['p_id'])}}</td>
+                      </tr>
+                      <tr>
+                        <td class="tdlabel">姓名:</td>
+                        <td class="tdcontents" id="patname">{{escape(info['name'])}}</td>
+                      </tr>
+                      <tr>
+                        <td class="tdlabel">性别:</td>
+                        <td class="tdcontents">{{escape(info['gender'])}}</td>           
+                      </tr>
+                      
+                    </tbody>
+                    {% end %}
+                  </table>
+              </div>
+
+              <div class="section" style="padding: 2px;">
+                <div style="text-align:center;height:24px;margin-top:10px;">
+                    <a href="/records/{{escape(info['p_id'])}}">
+                    <button  class="unibutton waves-light waves-effect btn blue darken-2" type="submit" name="action">
+                    病历详情
+                    </button>
+                    
+                    </a>
+                </div>    
+              </div>  
+
+            </div>
+          </div>
+        
+
+         <!-- 诊断结果box -->
+         <div id="diagnosebox" style="margin-top:10px;display:block; height:350px;border:2px solid #0767c8;">
+
+           <div id="diagtitle" style="height:27px;background-color:#0767c8;font-size:18px;text-align:center;color:aliceblue">
+              <label style="font-size:18px;color:aliceblue">
+              <b>诊断结果</b>
+              </label>
+           </div>
+
+            <!-- 新的table显示方法，依靠服务传来的数据（diag）对页面进行渲染，后面对应的各个div也是根据此方法添加-->
+            <div id="tablediv" style="clear:both;width:100%;height:275px;margin:0px;overflow:auto">
+ 
+              <table class="noborder striped" style="margin-top:-10px;clear:both;width:100%;">
+                <thead>
+                <tr class="dgtr">
+                  <th class="centerth">ICD9</th>
+                  <th class="centerth">名称</th>
+                  <th class="centerth">概率(%)</th>
+                  <th class="centerth">对比</th>
+                </tr>
+                </thead>
+                <tbody id="dgtable">
+                  {% for result in diag[0:1] %}
+                  <div style="display: none">{{ key = result['icd_9'] }}</div>
+                  <tr class="dgtr">
+                    <td class="dgcontents">
+                      {{escape(result["icd_9"])}}</td>
+                    <td class="dgtxt" style="word-wrap:break-word;word-break:break-all;">
+                      {{escape(disease_items[key])}}</td>
+                    <td class="dgrate">{{result["prob"]}}</td>
+                    <td class="dgcheck">
+                      <input type="checkbox" class="filled-in onedisease" name="selector" id="{{(result['icd_9'])}}"
+                      checked>
+                      <label for="{{result["icd_9"]}}"></label>
+                    </td>
+                  </tr>
+                  {% end %}
+                  {% for result in diag[1:5] %}
+                  <div style="display: none">{{ key = result['icd_9'] }}</div>
+                  <tr class="dgtr">
+                    <td class="dgcontents">
+                      {{escape(result["icd_9"])}}</td>
+                    <td class="dgtxt" style="word-wrap:break-word;word-break:break-all;">
+                      {{escape(disease_items[key])}}</td>
+                    <td class="dgrate">{{result["prob"]}}</td>
+                    <td class="dgcheck">
+                      <input type="checkbox" class="filled-in onedisease" name="selector" id="{{(result['icd_9'])}}">
+                      <label for="{{result["icd_9"]}}"></label>
+                    </td>
+                  </tr>
+                  {% end %}
+                  {% for result in diag[5:20] %}
+                  <div style="display: none">{{ key = result['icd_9'] }}</div>
+                  <tr class="dgtr" style="display:none">
+                    <td class="dgcontents">
+                      {{escape(result["icd_9"])}}</td>
+                    <td class="dgtxt" style="word-wrap:break-word;word-break:break-all;">
+                      {{escape(disease_items[key])}}</td>
+                    <td class="dgrate">{{result["prob"]}}</td>
+                    <td class="dgcheck">
+                      <input type="checkbox" class="filled-in onedisease" name="selector" id="{{result["icd_9"]}}" >
+                      <label for="{{result["icd_9"]}}"></label>
+                    </td>
+                  </tr>
+                  {% end %}
+              　 </tbody>
+              </table>  
+
+            </div>
+        
+          <!--新的查看更多的按钮-->
+            <div class="viewmorediag" style="margin-top: 5px;">
+              <div class="center-align container">
+                <button class="unibutton waves-light waves-effect btn blue darken-2 dgbutton" type="submit" name="action">更多
+                </button>
+              </div>
+            </div>
+
+         </div>
+         <!-- 诊断结果box结束 -->
+        </div>
+        <!-- 3列的页面结束处 -->
+
+         <!-- 9列的页面主内容 -->
+        <div  id="mostpage" class="row col s12 m9 l9">
+          <!-- 页面中显示的不同区域内容也由服务器传来渲染,循环语句添加全部的div，但设置为不可见-->
+            {% if diag %}
+            <!-- 初始界面中显示的是概率最高的，即第一个疾病，对应的勾选框在上面设置为已勾选 -->
+            {% for result in diag[:1] %}
+            <div style="display: none">{{ key = result['icd_9'] }}</div>
+            <div class="col s12 m12 l12"  id="{{(result['icd_9'])}}dv">
+              <div class="dgevidence" style="border:2px solid  lightgrey;overflow:auto;">
+                  <!-- 最上面那层标题加外链按钮-->
+                  <div class="evititle row" style="height:48px;margin-bottom: 2px;">
+                    <div style="margin-top:2px;margin-bottom: 2px;" class="row col s6 m7 l9">                             <label class="thedisease" style="font-size:1.6em;color:black;font-weight:bold;">
+                      {{escape(disease_items[key])}}</label>
+                    </div>
+                    
+                    <div style="margin-top:2px;margin-bottom: 2px;" class="row col s6 m5 l3">
+                      <!-- 之后要做成带有关键词的链接按钮，关键词从此局域中的疾病名称读取到，百度百科和百度医学 -->
+                      <!-- 后来发现疾病转化为中文复杂，故将链接改变为维基百科和pubmed-->
+                      <!-- 应该不需要用到js，直接在链接中加上渲染的疾病名即可 {{escape(result['icd_9'])}}-->
+                      <span style="margin-bottom: 2px;float: right">
+                        <a class="waves-effect waves-light btn blue darken-2 unibutton" href="http://www.wikidi.com/view/{{(disease_items[key].replace(' ','-'))}}"  target="_blank">疾病百科</a>
+                      </span>
+                      <span style="margin-right: 2px;margin-bottom: 2px;float: right">
+                        <a class="waves-effect waves-light btn blue darken-2 unibutton" href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{escape(disease_items[key])}}" target="_blank">最新研究</a>
+                      </span>
+                      
+                    </div>
+
+                  </div>
+                
+                  <div class="checktable" style="margin-top: 5px;margin-bottom: 5px;">
+
+
+                    <div style="height:30px;"　class="row">
+                      <div class="col s6 m5 l4" style="margin-top:2px;margin-left:2px;border-bottom:1px solid black;">
+                          <span style="float:left;font-size:1.3em;color:black;font-weight:bold;">诊断依据</span>
+                          <span style="float:left">&nbsp;</span>
+                          <a class="tooltipped"  data-html="true" data-position="right" data-delay="50" data-tooltip="【数据来源】：此疾病下产生的诊断依据，来自于MIMIC数据库中6058个肿瘤科病人的历史病例和检查项目。<br>【诊断原理】：利用大量病人的历史病例和检查项目值，使用数据挖掘的方法，计算出所有病人所属的主题以及相应概率，通过对主题的灵敏度分析得出此疾病所对应的相关主题。<br>【主题含义】：主题是大数据挖掘的结果，实质上是一些相近检查项目和检查结果的区间的集合，不同主题间存在显著差异。数据挖掘后共得到20个主题，表格中显示其各自编号。<br>【支持证据词含义】：主题词是大数据挖掘出用来概括主题的词语，每个主题右方显示的项目就是主题词，其中可能包括病例中出现的症状，也可能是某项检查和检查结果的一个区间。"><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                      </div>             
+                    </div>
+
+                    <div class="evitable1">
+                      <div id="checklabel" style="text-align:center;">
+                        <label style="font-size:15px;color:#0767c8;font-weight:bold;">大数据主题挖掘诊断结果</label>
+                      </div>
+                      <div id="detailtable1" style="margin-top:4px;">
+                        <table class="hasborder" style="width:100%;">
+                          <thead>
+                            <tr>
+                                <th class="checkthead" >主题</th>
+                                <th class="checkthead" >支持证据词</th>
+                            </tr>
+                          </thead>
+                          
+                          <tbody>
+                            
+                            {% for evitopic in disease_evi[key] %}
+                                
+                            <tr>
+                              <td style="text-align: center">{{escape(str(evitopic))}}</td>
+                              <td>{{(str(" ; ".join(topic_term[str(evitopic)])))}}</td>
+                            </tr>
+                            {% end %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- 推荐检查项目板块-->
+                  <div class="checkrecommend"> 
+                    
+                    <div class="rectitle row" style="height:30px;margin-bottom: 0px;">
+                       <div class="col s6 m5 l4" style="margin-top:2px;margin-left:2px;border-bottom:1px solid black;">
+                          <span style="float:left;font-size:1.3em;color:black;font-weight:bold;">检查项推荐</span>
+                          <span style="float:left">&nbsp;</span>
+                          <a class="tooltipped" data-html="true" data-position="right" data-delay="50" data-tooltip="【数据来源】：此疾病下产生的推荐项目，来自于MIMIC数据库中6707个肿瘤科病人的检查项目。<br>【计算方法】：患此疾病的所有病人的检查项目的交集。<br>【注意】：①在提交检查项目之后，系统会尽可能多地从外部检验科信息系统得到此病人相应的项目。②系统会每60秒进行一次检查，若有新的项目进行了检查，则会对患病概率进行新的计算，同时重新生成新的推荐检查项目。"><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                      </div>
+                    </div>
+                    <!-- 每个选择框的id要不同，还要更渲染时使用的病人id结合起来,原先的chooseitems在js的添加、全选和确认中都有-->
+                    <div id="{{(result['icd_9'])}}%choices" class="chooseitems" style="margin-top:2px;">
+                      {% for i,recresult in enumerate(reclists[key]) %}
+                      <div style="display: none">{{ itemkey = recresult }}</div>
+                      {% if i < 10 %}
+                      <span style="margin-left: 2px;font-size:12px;"> 
+                      <input type="checkbox" class="filled-in" name="selector" id="{{(result['icd_9'])}}*choice%{{i}}" >
+                      <label for="{{(result['icd_9'])}}*choice%{{i}}" style="width:300px;" name="{{escape(itemkey)}}">
+                        {{escape(items_detail[itemkey])}}</label>
+                      </span>
+                      {% end %}
+                      {% if i >= 10 %}
+                      <span style="margin-left: 2px;font-size:12px;display: none"> 
+                      <input type="checkbox" class="filled-in" name="selector" id="{{(result['icd_9'])}}*choice%{{i}}" >
+                      <label for="{{(result['icd_9'])}}*choice%{{i}}" style="width:300px;" name="{{escape(itemkey)}}">
+                        {{escape(items_detail[itemkey])}}</label>
+                      </span>
+                      {% end %}
+
+                      {% end %}
+                    </div>
+
+                    <div style="margin-top:5px;margin-bottom:5px;height:30px;">
+                     <!-- 输入框的id也要改变-->
+                      <div style="float:left;margin-left:5px;"> 
+                        
+                        <input style="width: 150px;height:25px;margin-bottom:0px;" type="text" id="{{(result['icd_9'])}}input" class="inputitem" value="输入增加指标" >
+                      </div>
+
+                      <button  class="additem mysmallbut btn btn-floating waves-effect waves-light blue darken-2">
+                        <span style="color: antiquewhite">+</span>
+                      </button>
+                      
+                      <div style="float:right;margin-right:10px;"> 
+                        <button  class="waves-effect waves-light btn blue darken-2 unibutton admitcheck">确认</button>
+                      </div>
+                      <div style="float:right;margin-right:5px;">
+                        <button  class="waves-effect waves-light btn blue darken-2 unibutton recmore">更多推荐</button>
+                      </div>
+                      <div style="float:right;margin-right:5px;">
+                        <input type="checkbox" class="filled-in chooseall" id="{{(result['icd_9'])}}*choice%all" >
+                        <label for="{{(result['icd_9'])}}*choice%all">全选</label>
+                      </div>
+                      
+                    </div>
+                    
+
+                  </div>
+
+              </div>
+            </div>
+            {% end %}
+
+            <!-- 第二个疾病，对应的勾选框设置为未勾选 -->
+            {% for result in diag[1:] %}
+            <div style="display: none">{{ key = result['icd_9'] }}</div>
+            <div class="col s12 m12 l12" style="display: none" id="{{(result['icd_9'])}}dv">
+              <div class="dgevidence" style="border:2px solid  lightgrey;overflow:auto;">
+                  <!-- 最上面那层标题加外链按钮-->
+                  <div class="evititle row" style="height:48px;margin-bottom: 2px;">
+                    <div style="margin-top:2px;margin-bottom: 2px;" class="row col s6 m7 l9">                             <label class="thedisease" style="font-size:1.6em;color:black;font-weight:bold;">
+                      {{escape(disease_items[key])}}</label>
+                    </div>
+                    
+                    <div style="margin-top:2px;margin-bottom: 2px;" class="row col s6 m5 l3">
+                      <!-- 之后要做成带有关键词的链接按钮，关键词从此局域中的疾病名称读取到，百度百科和百度医学 -->
+                      <!-- 后来发现疾病转化为中文复杂，故将链接改变为维基百科和pubmed-->
+                      <!-- 应该不需要用到js，直接在链接中加上渲染的疾病名即可 {{escape(result['icd_9'])}}-->
+                      <span style="margin-bottom: 2px;float: right">
+                        <a class="waves-effect waves-light btn blue darken-2 unibutton" href="http://www.wikidi.com/view/{{(disease_items[key].replace(' ','-'))}}" target="_blank">疾病百科</a>
+                      </span>
+                      <span style="margin-right: 2px;margin-bottom: 2px;float: right">
+                        <a class="waves-effect waves-light btn blue darken-2 unibutton" href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{escape(disease_items[key])}}" target="_blank">最新研究</a>
+                      </span>
+                      
+                    </div>
+
+                  </div>
+                
+                  <div class="checktable" style="margin-top: 5px;margin-bottom: 5px;">
+
+                    <div style="height:30px;"　class="row">
+                      <div class="col s6 m5 l4" style="margin-top:2px;margin-left:2px;border-bottom:1px solid black;">
+                          <span style="float:left;font-size:1.3em;color:black;font-weight:bold;">诊断依据</span>
+                          <span style="float:left">&nbsp;</span>
+                          <a class="tooltipped"  data-html="true" data-position="right" data-delay="50" data-tooltip="【数据来源】：此疾病下产生的诊断依据，来自于MIMIC数据库中6058个肿瘤科病人的历史病例和检查项目。<br>【诊断原理】：利用大量病人的历史病例和检查项目值，使用数据挖掘的方法，计算出所有病人所属的主题以及相应概率，通过对主题的灵敏度分析得出此疾病所对应的相关主题。<br>【主题含义】：主题是大数据挖掘的结果，实质上是一些相近检查项目和检查结果的区间的集合，不同主题间存在显著差异。数据挖掘后共得到20个主题，表格中显示其各自编号。<br>【支持证据词含义】：主题词是大数据挖掘出用来概括主题的词语，每个主题右方显示的项目就是主题词，其中可能包括病例中出现的症状，也可能是某项检查和检查结果的一个区间。"><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                      </div>             
+                    </div>
+
+                    <div class="evitable1">
+                      <div id="checklabel" style="text-align:center;">
+                        <label style="font-size:15px;color:#0767c8;font-weight:bold;">大数据主题挖掘诊断结果</label>
+                      </div>
+                      <div id="detailtable1" style="margin-top:4px;">
+                        <table class="hasborder" style="width:100%;">
+                          <thead>
+                            <tr>
+                                <th class="checkthead"　>主题</th>
+                                <th class="checkthead"　>支持证据词</th>
+                            </tr>
+                          </thead>
+                          
+                          <tbody>
+                            
+                            {% for evitopic in disease_evi[key] %}
+                            <tr>
+                              <td style="text-align: center">{{escape(str(evitopic))}}</td>
+                              <td>{{(str(" ; ".join(topic_term[str(evitopic)])))}}</td>
+                            </tr>
+                          
+                            {% end %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- 推荐检查项目板块-->
+                  <div class="checkrecommend"> 
+                    <div class="rectitle row" style="height:30px;margin-bottom: 0;">
+                       <div class="col s6 m5 l4" style="margin-top:2px;margin-left:2px;border-bottom:1px solid black;">
+                          <span style="float:left;font-size:1.3em;color:black;font-weight:bold;">检查项推荐</span>
+                          <span style="float:left">&nbsp;</span>
+                          <a class="tooltipped" data-html="true" data-position="right" data-delay="50" data-tooltip="【数据来源】：此疾病下产生的推荐项目，来自于MIMIC数据库中6707个肿瘤科病人的检查项目。<br>【计算方法】：患此疾病的所有病人的检查项目的交集。<br>【注意】：①在提交检查项目之后，系统会尽可能多地从外部检验科信息系统得到此病人相应的项目。②系统会每60秒进行一次检查，若有新的项目进行了检查，则会对患病概率进行新的计算，同时重新生成新的推荐检查项目。"><i style="font-size:22px;margin-top:1px;" class="large material-icons">info_outline</i></a>
+                      </div>
+                    </div>
+                    <!-- 每个选择框的id要不同，还要更渲染时使用的病人id结合起来,原先的chooseitems在js的添加、全选和确认中都有-->
+                    <div id="{{(result['icd_9'])}}%choices" class="chooseitems" style="margin-top:2px;">
+                      {% for i,recresult in enumerate(reclists[key]) %}
+                      <div style="display: none">{{ itemkey = recresult }}</div>
+                      {% if i < 10 %}
+                      <span style="margin-left: 2px;font-size:12px;"> 
+                      <input type="checkbox" class="filled-in" name="selector" id="{{(result['icd_9'])}}*choice%{{i}}" >
+                      <label for="{{(result['icd_9'])}}*choice%{{i}}" style="width:300px;" name="{{escape(itemkey)}}">
+                        {{escape(items_detail[itemkey])}}</label>
+                      </span>
+                      {% end %}
+                      {% if i >= 10 %}
+                      <span style="margin-left: 2px;font-size:12px;display: none"> 
+                      <input type="checkbox" class="filled-in" name="selector" id="{{(result['icd_9'])}}*choice%{{i}}" >
+                      <label for="{{(result['icd_9'])}}*choice%{{i}}" style="width:300px;" name="{{escape(itemkey)}}">
+                        {{escape(items_detail[itemkey])}}</label>
+                      </span>
+                      {% end %}
+
+                      {% end %}
+                    </div>
+
+                    <div style="margin-top:5px;margin-bottom:5px;height:30px;">
+                     <!-- 输入框的id也要改变-->
+                      <div style="float:left;margin-left:5px;"> 
+                        
+                        <input style="width: 150px;height:25px;margin-bottom:0px;" type="text" id="{{(result['icd_9'])}}input"  class="inputitem" value="输入增加指标">
+                      </div>
+
+                      <button  class="additem mysmallbut btn btn-floating waves-effect waves-light blue darken-2">
+                        <span style="color: antiquewhite">+</span>
+                      </button>
+                      <!-- {% raw  xsrf_form_html()  %}-->
+                      <div style="float:right;margin-right:10px;"> 
+                        <button  class="waves-effect waves-light btn blue darken-2 unibutton admitcheck">确认</button>
+                      </div>
+                      <div style="float:right;margin-right:5px;">
+                        <button  class="waves-effect waves-light btn blue darken-2 unibutton recmore">更多推荐</button>
+                      </div>
+                      <div style="float:right;margin-right:5px;">
+                        <input type="checkbox" class="filled-in chooseall" id="{{(result['icd_9'])}}*choice%all" >
+                        <label for="{{(result['icd_9'])}}*choice%all">全选</label>
+                      </div>
+                      
+                    </div>
+                    
+
+                  </div>
+
+              </div>
+            </div>
+            {% end %}
+            {% end %}
+           
+        </div>
+     
+  </div>
+
+
+
+  <script src="{{ static_url("js/jquery-1.9.0.min.js")}}"></script>
+  <script src="{{ static_url("js/materialize.min.js") }}"></script>
+  <script src="{{ static_url("js/mine.js")}}"></script>
+
+</body>
+</html>

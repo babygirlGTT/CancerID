@@ -2,12 +2,14 @@
 <html lang="zh">
   <head>
     <meta charset="utf-8">
-        <title>病人信息-CancerID</title>
+        <title>病人信息导航</title>
         <link href="{{ static_url("css/material.min.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ static_url("css/materialize.min.css")}}" rel="stylesheet" type="text/css"/>
         <link href="{{ static_url("css/mine.css")}}" rel="stylesheet" type="text/css" >
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 <body>
+<!--  
 <nav>
   <div class="nav-wrapper indigo">
     <a href="/" class="brand-logo">CancerID</a>
@@ -23,35 +25,60 @@
     </ul>
   </div>
 </nav>
+-->
+  <nav>
+    <div class="nav-wrapper row" style="background-color:#0767c8">
+      <a  style="margin-left:20px;" href="/" class="brand-logo left col s1 m2 l3">CancerID</a>
+
+      <ul style="height:60px;" class="col s5 m6 l6 offset-l3 offset-m2 offset-s1">
+        <li class="active"><a class="navlink" href="/">病人信息</a></li>
+        <li><a class="navlink" href="http://wikidi.com/category/disease-or-medical-condition" target="_blank">疾病百科</a></li>
+        <li><a class="navlink" href="https://www.ncbi.nlm.nih.gov/pubmed" target="_blank">医学数据库</a></li>
+        
+      </ul>
+
+      <div class="col s6 m4 l3">
+        <span >当前用户:</span>
+        {% if current_user %}
+        <span  id="adminuser">{{user["name"]}}</span>
+        {% end %}
+        <span style="width: 3px;">&nbsp;</span>
+        <span>
+          <a href="/logout">
+          <button  class="waves-effect waves-light btn blue quitbutton">退出</button>
+          </a>
+        </span>
+      </div>
+    </div>
+  </nav>
+
     <!-- Bottom row, not visible on scroll -->
  <div class="divider"></div>
   <div class="section">
-  <main class="mdl-layout__content">
-    <div class="page-content"><!-- Your content goes here -->
 
       <div class="row">
         <!-- 左边的3列内容 -->
-        <div class="col s12 m6 l3" style="padding-top:8px;">
+        <div class="col s12 m3 l2" style="padding-top:8px;">
           
   
          <!-- 病历查看 -->
-         <div id="diagnosebox" style="margin-top:10px;display:block; height:290px;border:2px solid #3f51b5;">
-           <div id="diagtitle" style="height:27px;background-color:#3f51b5;text-align:center;color:aliceblue">
+         <div id="diagnosebox" style="display:block; height:480px;border:2px solid #0767c8;">
+           <div id="diagtitle" style="height:27px;background-color:#0767c8;text-align:center;color:aliceblue">
               <label style="font-size:18px;color:aliceblue">
               <b>病历查看</b>
               </label>
            </div>
            <!-- 下拉菜单列表-->
            <div class="bin-list" style="margin:0px;overflow:auto">
-               {% for patient in patients %}
+               {% for patient in patients[:8] %}
               <div class="subNav">
                   {{ escape(patient["p_id"]) }}
                   {{ escape(patient["name"]) }}
               </div>
               <ul class="navContent" style="display:block;">
-
-                	<li class="lsitem"><a href="#">历史病历</a></li>
-                	<li class="lsitem"><a href="#">检查单</a></li>
+                  <li class="lsitem"><a href="/diagnosis/{{escape(patient["p_id"])}}">诊断信息</a></li>
+                	<li class="lsitem"><a href="/records/{{ escape(patient["p_id"]) }}">病历单</a></li>
+                	<li class="lsitem"><a href="/records/{{ escape(patient["p_id"]) }}">检查单</a></li>
 
               </ul>
               {% end %}
@@ -63,92 +90,53 @@
 
 
          <!-- 右边的页面主内容 -->
-        <div class="col s12 m6 l9 row">
+        <div class="row col s12 m9 l10">
           <!-- 第一个3列-->
-          {% for patient in patients %}
-          <div class="col s12 m6 l3 ">
+          {% for patient in patients[:8] %}
+          <div class="col s12 m6 l3" style="height:307px;max-height: 330px;min-height: 280px;">
             <div class="card mycard">
-                  <div class="card-content black-text" style="padding:6px;">
-                  
-                    <table class="tdcentered"> 
-                      <tbody>
-                        <tr>
-                          <td class="tdlabel">编号:</td>
-                          <td class="tdcontents">{{ escape(patient["p_id"]) }}</td>
-                        </tr>
-                        <tr>
-                          <td class="tdlabel">姓名:</td>
-                          <td class="tdcontents">{{ escape(patient["name"]) }}</td>
-                        </tr>
-                        <tr>
-                          <td class="tdlabel">性别:</td>
-                          <td class="tdcontents">{{ escape(patient["gender"]) }}</td>
-                        </tr>
-                        <tr>
-                          <td class="tdlabel">诊断结果:</td>
-                          <td class="tdcontents">无</td>           
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="card-action mine-card-action" style="text-align:center;padding:4px;">
-                    <a  id="bluelink"  href="/diagnosis/{{ escape(patient["p_id"]) }}">查看更多</a>
-                  </div>
-                </div>
-            
-            </div>
-            {% end %}
-             <!-- 医生账户信息 
-            <div id="countinfo" style="margin:0px;display:block; height:180px;border:2px solid #3f51b5;">
-              <div id="docinfotitle" style="height:27px;background-color:#3f51b5;font-size:18px;text-align:center;color:aliceblue">
-                <label style="font-size:18px;color:aliceblue">
-                <b>医生账户信息</b>
-                </label>
-              </div>
-              <div class="docinfobox" style="display:block;width:99%;">
-                <table class="tdcentered">
+
+              <div style="display: none">{{ key = patient["result"]  }}</div>
+              <div class="card-content black-text" style="padding:6px;">
+              
+                <table class="tdcentered"> 
                   <tbody>
-                    <tr>
+                    <tr class="linetr">
                       <td class="tdlabel">编号:</td>
-                      <td class="tdcontents">001</td>
+                      <td class="tdcontents">{{ escape(patient["p_id"]) }}</td>
                     </tr>
-                    <tr>
+                    <tr class="linetr">
                       <td class="tdlabel">姓名:</td>
-                      <td class="tdcontents">张朝健</td>
+                      <td class="tdcontents">{{ escape(patient["name"]) }}</td>
                     </tr>
-                    <tr>
-                      <td class="tdlabel">年龄:</td>
-                      <td class="tdcontents">30</td>
-                    </tr>
-                    <tr>
+                    <tr class="linetr">
                       <td class="tdlabel">性别:</td>
-                      <td class="tdcontents">男</td>            
+                      <td class="tdcontents">{{ escape(patient["gender"]) }}</td>
                     </tr>
-                    <tr>
+                    <tr class="linetr">
                       <td class="tdlabel">诊断结果:</td>
-                      <td class="tdcontents">XXX</td>           
+                      <td class="tdcontents">{{ escape(disease_items[key]) }}</td>           
+                    </tr>
+                    <tr >
+                      <td class="tdlabel">诊断时间:</td>
+                      <td class="tdcontents">{{ escape(patient["time"]) }}</td>           
                     </tr>
                   </tbody>
                 </table>
-                <div style="text-align:center;height:24px;">
-                  <button id="userinf" class="mdl-button mdl-js-button mdl-button--raised mybutton">
-                    查看详情
-                  </button>
-                </div>    
-                      
               </div>
-
+              <div class="card-action mine-card-action" style="text-align:center;padding:4px;">
+                <a  id="bluelink"  href="/diagnosis/{{escape(patient["p_id"])}}">诊断信息</a>
+                
+              </div>
             </div>
-             -->
+            
           </div>
-         
-          <!-- 第四个3列-->
-        
+          {% end %}
+             
         </div>
      
       </div>
-    </div>
-  </main>
+   
 
   </div>
     <script src="{{ static_url("js/material.min.js") }}"></script>

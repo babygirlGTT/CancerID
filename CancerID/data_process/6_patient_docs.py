@@ -32,7 +32,7 @@ def doc_gen(docs, tin, titles, flag=''):
             if count%1000000 == 0:
                 n +=1
                 te = time.time()
-                print '\t', n, te-ts
+                print('\t', n, te-ts)
                 ts = time.time()
         cursor.close()
     else:
@@ -58,24 +58,24 @@ def main():
     titles = ['GENDER']
     docs = doc_gen(docs, patients, titles)
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     admit = mimic.ADMISSIONS
     titles = ['MARITAL_STATUS', 'ETHNICITY', 'DIAGNOSIS']
     docs = doc_gen(docs, admit, titles)
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     oute = mimic.OUTPUTEVENTS
     titles = ['ITEMID', 'VALUE']
     docs = doc_gen(docs, oute, titles, 'VALUE')
-    print docs['73397']
+    print(docs['73397'])
     with open('/home/zn/Desktop/doc.json', 'wb') as f:
         json.dump(docs, f)
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     labe = mimic.LABEVENTS
@@ -84,7 +84,7 @@ def main():
     with open('/home/zn/Desktop/doc.json', 'wb') as f:
         json.dump(docs, f)
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     charte = mimic.CHARTEVENTS
@@ -93,7 +93,7 @@ def main():
     with open('/home/zn/Desktop/doc.json', 'wb') as f:
         json.dump(docs, f)
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     diag = conn.diagnosis
@@ -102,7 +102,7 @@ def main():
     for u in docs:
         p_docs.insert_one({'SUBJECT_ID':u, 'time':datetime.now(), 'document':docs[u]})
     e = time.time()
-    print e-s
+    print(e-s)
 
 if __name__ == '__main__':
     main()

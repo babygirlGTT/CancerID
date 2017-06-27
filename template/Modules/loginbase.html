@@ -1,17 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="zh">
     <head>
         <title>{{ escape(handler.settings["title"])}}</title> 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <script type="text/javascript" href="{{ static_url("js/jquery-1.9.0.min.js") }}"></script>
-        <script type="text/javascript" href="{{ static_url("js/login.js") }}"></script>
+        <!--<script type="text/javascript" href="{{ static_url("js/login.js") }}"></script>-->
         <link href="{{ static_url("css/login.css") }}" rel="stylesheet" type="text/css" />
         {% block head %}{% end %}
     </head>
     <body>
-    <h1>肿瘤辅助诊断系统[CancerID]</h1>
+    <h1 style="margin-top:40px;">肿瘤辅助诊断系统</br>CancerID</h1>
 
-    <div class="login" style="margin-top:60px;">
+    <div class="login" style="margin-top:25px;">
     <div class="header">
         <label class="login_title"><b>用户登录</b>
         </label>

@@ -6,6 +6,48 @@ html {
 	
 }
 
+/*新的网页头*/
+.navlink{
+height:64px;
+line-height:60px;
+font-size:15px;
+vertical-align:middle;
+text-align:center;
+}
+
+/*新的按钮颜色,统一的大小的按钮*/
+.unibutton{
+    
+    color:aliceblue;
+    font-size: 14px;
+    width:80px;
+    height:25px;
+    line-height: 25px;
+    padding: 0 5px 0 5px;
+    
+}
+
+.quitbutton{
+
+    color:white;
+    font-size: 14px;
+    font-weight: bold;
+    width:60px;
+    height:25px;
+    line-height: 25px;
+    padding: 0 5px 0 5px;
+    
+}
+
+/*小的圆形按钮,因为btn-floating*/
+.mysmallbut{
+    width:25px;
+    height:25px;
+    line-height: 25px;
+}
+/**/
+
+
 .docinfobox{
     padding:2px; 
 }
@@ -68,6 +110,7 @@ p.doctorinfo{
     width:99%;
     height:90%;
     margin:10px;
+
 }
 
 a{ text-decoration:none;}
@@ -77,17 +120,17 @@ ol, ul { list-style: none; }
 
 .subNav{border-bottom:solid 1px #e5e3da;cursor:pointer;text-indent:10px;font-weight:bold;font-size:14px;color:#333;line-height:28px;padding-left:0px;}
 
-.subNav:hover{color:#3f51b5;;}
+.subNav:hover{color:#0767c8;}
 
-.currentDd{color:#3f51b5;}
+.currentDd{color:#0767c8;}
 
-.currentDt{font-size:16px;}
+.currentDt{font-size:15px;}
 
 .navContent{display: none;border-bottom:solid 1px #e5e3da;padding:0px;margin:0px;}
 
-.navContent li a{display:block;width:100%;height:24px;text-align:center;font-size:14px;letter-spacing:10px;line-height:28px;color:#333}
+.navContent li a{display:block;width:100%;height:24px;text-align:center;font-size:14px;letter-spacing:2px;line-height:28px;color:#333}
 
-.navContent li a:hover{color:#fff;background-color:#3f51b5;}
+.navContent li a:hover{color:#fff;background-color:#0767c8;}
 
 .listitem{
 
@@ -107,7 +150,7 @@ th.thcenter{
 }
 
 td.tdlabel{
-    text-align:center;
+    text-align:left;
     font-weight:bold;
     letter-spacing:2px;
     width:55%;
@@ -118,8 +161,20 @@ td.tdcontents{
     letter-spacing:2px;
     border:none;
 }
+
+th.centerth{
+    text-align:center;
+    letter-spacing:1px;
+}
 td.dgcontents{
-    text-indent: 5px;
+    
+    text-align:center;
+    letter-spacing:1px;
+    width:15%;
+    border:none;
+}
+td.dgtxt{
+    font-size: 15px;
     text-align:left;
     letter-spacing:1px;
     width:45%;
@@ -127,14 +182,14 @@ td.dgcontents{
 }
 td.dgrate{
     text-align:center;
-    letter-spacing:2px;
-    width:35%;
+    letter-spacing:1px;
+    width:23%;
     border:none;
 }
 td.dgcheck{
     text-align:center;
     border:none;
-    width:20%;
+    width:16%;
 }
 
 .patdetails{
@@ -182,18 +237,23 @@ font-size:14px;
     background-color:lightyellow;
 }
 
+.linetr{
+    border-bottom: 0.5px solid #0767c8;
+}
+
 .mine-card-action {   
     padding:4px 24px;
+    
 }
 
 #bluelink{
     margin: 0px;
-    
-    color:black;
+    font-weight:bold;
+    color: #3f51b5;
     
 }
 .mine-card-action a#bluelink:hover{
-    background-color:#3f51b5;
+    background-color:#0767c8;
    color:white;
 }
 
@@ -212,18 +272,48 @@ font-size:14px;
 }
 
 .evitable1{
-width:100%;
-height:100%;
+height: 295px;
+overflow: auto;
+width:88%;
+margin-left:5%;
+margin-right:15%;
 }
+
 .evitable2{
-
-width:100%;
-height:100%;
+width:78%;
+margin-left:10%;
+margin-right:10%;
+float:left;
+height:170px;
 }
 
-#hasborder thead tr th, tbody tr td{
+.chooseitems{
+    height: 88px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.checkrecommend{
+    margin-top:2px;
+}
+
+/*带边框的不带边框的table*/
+table.hasborder td{
+    border:1px solid #3f51b5;
+    
+}
+table.hasborder th{
     border:1px solid #3f51b5;
 }
+
+
+table.hasnoborder td{
+    border:none;
+}
+table.hasnoborder th{
+    border:none;
+}
+
 
 .itemforchoose{
     width:100px;
@@ -231,10 +321,10 @@ height:100%;
 }
 
 .additem{
-    height: 70%;
-    width: 70%;
+    height: 22px;
+    width: 22px;
     min-width:0;
-    color: #3f51b5;
+    color: #0767c8;
     
     text-align:center;
     font-size: 22px;
@@ -254,11 +344,11 @@ height:100%;
  margin-left:10px; 
  Height:21px;
  Width:50px;
- color: #3f51b5;
+ color: #0767c8;
 }
 
 .admitbutton{
-    font-size:16px;
+ font-size:16px;
  text-align:center;
  padding:0px;
  vertical-align:text-top ;
@@ -266,22 +356,14 @@ height:100%;
  margin-left:10px; 
  Height:21px;
  Width:50px;
- color: #3f51b5;
+ color: #0767c8;
 }
 
-.feedbutton{
- font-size:16px;
- text-align:center;
- padding:0px;
- vertical-align:text-top ;
- line-height:22px;
- margin-top:10px;
- margin-bottom:5px;
- height:21px;
- width:40px;
- color: #3f51b5;
-}
 
 .basictext{
 
+}
+
+.reclist{
+    padding: 5px;
 }

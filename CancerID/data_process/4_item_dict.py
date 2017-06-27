@@ -44,20 +44,18 @@ def main():
     fn = '/home/zn/Desktop/mimic/OUTPUTEVENTS_DATA_TABLE.csv'
     dic = dict_gen(dic, fn, key='VALUE')
     e = time.time()
-    print e-s
+    print(e-s)
 
     s = time.time()
     fn = '/home/zn/Desktop/mimic/LABEVENTS_DATA_TABLE.csv'
     dic = dict_gen(dic, fn)
     e = time.time()
-    print e-s
-
+    print(e-s)
     s = time.time()
     fn = '/home/zn/Desktop/mimic/CHARTEVENTS_DATA_TABLE.csv'
     dic = dict_gen(dic, fn)
     e = time.time()
-    print e-s
-
+    print(e-s)
     for key in dic.keys():
         dic[key]['nums'] = list(dic[key]['nums'])
     with open('/home/zn/Desktop/item_dict.json', 'wb') as f:

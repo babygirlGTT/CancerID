@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+<title>病历检查单界面</title>
+<!--<link rel="stylesheet" href="static/css/material.min.css">
+<link rel="stylesheet" href="static/css/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/mine.css">-->
+<link href="{{ static_url("css/materialize.min.css")}}" rel="stylesheet" type="text/css"/>
+<link href="{{ static_url("css/mine.css")}}" rel="stylesheet" type="text/css" >
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--
+<script src="static/js/jquery-1.9.0.min.js"></script>
+<script src="static/js/material.min.js"></script>
+<script src="static/js/materialize.min.js"></script>
+<script  src="static/js/mine.js"></script>-->
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-wrapper row" style="background-color:#0767c8">
+      <a  style="margin-left:20px;" href="/" class="brand-logo left col s1 m2 l3">CancerID</a>
+
+      <ul style="height:60px;" class="col s5 m6 l6 offset-l3 offset-m2 offset-s1">
+        <li class="active"><a class="navlink" href="/">病人信息</a></li>
+        <li><a class="navlink" href="http://wikidi.com/category/disease-or-medical-condition" target="_blank">疾病百科</a></li>
+        <li><a class="navlink" href="https://www.ncbi.nlm.nih.gov/pubmed" target="_blank">医学数据库</a></li>
+        
+      </ul>
+
+      <div class="col s6 m4 l3">
+        <span >当前用户:</span>
+        {% if current_user %}
+        <span  id="adminuser">{{user["name"]}}</span>
+        {% end %}
+        <span style="width: 3px;">&nbsp;</span>
+        <span>
+          <a href="/logout">
+          <button  class="waves-effect waves-light btn blue quitbutton">退出</button>
+          </a>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <div class="divider"></div>
+  
+ 
+
+  <div class="row" style="margin-top:20px;">
+    <!-- 左边的小列内容 -->
+    
+
+    <div  class="col s12 m3 l2">
+      
+      <!-- 病人基本信息 -->
+      <div id="infobox" style="margin:0px;display:block; height:180px;border:2px solid #0767c8;">
+        <div id="basictitle" style="height:27px;background-color:#0767c8;font-size:18px;text-align:center;color:aliceblue">
+          <label style="font-size:18px;color:aliceblue">
+          <b>基本信息</b>
+          </label>
+        </div>
+        <div class="basictext">
+          <div class="patinfobox">
+              <table class="tdcentered" style="margin-top:25px;">
+                {% if info %}
+                <tbody>
+                  <tr>
+                    <td class="tdlabel">编号:</td>
+                    <td class="tdcontents" name ="p_id">{{escape(info['p_id'])}}</td>
+                  </tr>
+                  <tr>
+                    <td class="tdlabel">姓名:</td>
+                    <td class="tdcontents" id="patname">{{escape(info['name'])}}</td>
+                  </tr>
+                  <tr>
+                    <td class="tdlabel">性别:</td>
+                    <td class="tdcontents">{{escape(info['gender'])}}</td>           
+                  </tr>
+                  
+                </tbody>
+                {% end %}
+              </table>
+          </div>
+            
+        </div>
+      </div>
+    
+      <!-- 改变的内容——病历和检查单box -->
+      <div id="recordsbox" style="margin-top:10px;display:block; height:300px;border:2px solid #0767c8;">
+        <div id="recordstitle" style="height:27px;background-color:#0767c8;font-size:18px;text-align:center;color:aliceblue">
+          <label style="font-size:18px;color:aliceblue">
+          <b>病历、检查单</b>
+          </label>
+        </div>
+
+        <div id="recordslist" style="height:250px;margin:0px;overflow:auto">
+          
+          <div class="subNav">
+            检查单列表(展开显示)
+          </div>
+          <ul class="navContent">
+            {% for item in outputlist[:8] %}
+            <li class="lsitem"><a class="lista" href="#" name="{{(item['_id'])}}">{{escape(item["ITEMID"])}}
+            </a></li>
+            {% end %}
+          </ul>
+
+          <div class="subNav">
+            病历单列表(展开显示)
+          </div>
+          <ul class="navContent" >
+            {% for item in recordtxt[:8] %}
+            <li class="lsitem"><a class="listR" href="#" name="{{(item['_id'])}}">{{escape(item["CHARTDATE"])}}
+            </a></li>
+            {% end %}
+          </ul>
+
+        </div>
+                  
+      </div>
+
+    </div>
+
+      <!-- 9列的页面主内容 -->
+    <div  id="mostpage" class="row col s12 m9 l10">
+
+      <!-- 某一诊断的具体描述 -->
+      <div  id="firstpage" class="col s12 m6 l6" style="height:500px;border:2px solid  lightgrey;overflow:auto;">
+      
+        <!-- 不使用container的话，就要改变div样式：style="width:60%;margin-left:20%;margin-right:20%; -->
+        <div id="chklistable" class="container" style="overflow:auto">
+          <h5 style="text-align:center;margin-bottom:10px;">检查单显示处</h5>
+          {% for item in outputlist[:8] %}
+          <table class="striped hasnoborder recognize" style="display: none" id="{{(item['_id'])}}">
+            <tbody>
+              <!--
+              <tr>
+                <td>_id</td>
+                <td>{{(item['_id'])}}</td>
+              </tr>
+              -->
+              <tr>
+                <td>ITEMID</td>
+                <td>{{escape(item['ITEMID'])}}</td>
+              </tr>
+              <tr>
+                <td>ICUSTAY_ID</td>
+                <td>{{escape(item['ICUSTAY_ID'])}}</td>
+              </tr>
+              <tr>
+                <td>CGID</td>
+                <td>{{escape(item['CGID'])}}</td>
+              </tr>
+              <tr>
+                <td>SUBJECT_ID</td>
+                <td>{{escape(item['SUBJECT_ID'])}}</td>
+              </tr>
+              <tr>
+                <td>VALUENUM</td>
+                <td>{{escape(item['VALUENUM'])}}</td>
+              </tr>
+              <tr>
+                <td>VALUE</td>
+                <td>{{escape(item['VALUE'])}}</td>
+              </tr>
+              <tr>
+                <td>STORETIME</td>
+                <td>{{escape(item['STORETIME'])}}</td>
+              </tr>
+              <tr>
+                <td>CHARTTIME</td>
+                <td>{{escape(item['CHARTTIME'])}}</td>
+              </tr>
+              <tr>
+                <td>WARNING</td>
+                <td>{{escape(item['WARNING'])}}</td>
+              </tr>
+              <tr>
+                <td>STOPPED</td>
+                <td>{{escape(item['STOPPED'])}}</td>
+              </tr>
+              <tr>
+                <td>RESULTSTATUS</td>
+                <td>{{escape(item['RESULTSTATUS'])}}</td>
+              </tr>
+              <tr>
+                <td>ERROR</td>
+                <td>{{escape(item['ERROR'])}}</td>
+              </tr>
+              <tr>
+                <td>VALUEUOM</td>
+                <td>{{escape(item['VALUEUOM'])}}</td>
+              </tr>
+              <tr>
+                <td>HADM_ID</td>
+                <td>{{escape(item['HADM_ID'])}}</td>
+              </tr>
+            </tbody>
+          </table>
+          {% end %}
+          
+
+        </div>
+
+      </div>
+      
+      <div id="secondpage" class="col s12 m6 l6" style="height:500px;overflow:auto;border:2px solid lightgrey;">
+        <h5 style="text-align:center;margin-bottom:10px;">病历单显示处</h5>
+        {% for item in recordtxt[:8] %}
+        <div class="onerecord" style="display: none" id="{{(item['_id'])}}">
+          <pre><p>{{escape(item['TEXT'])}}</p></pre>
+        </div>
+        {% end %}
+      </div>
+    </div>
+  
+  </div>
+    
+
+  
+
+</div>
+
+<script src="{{ static_url("js/jquery-1.9.0.min.js")}}"></script>
+<script src="{{ static_url("js/material.min.js") }}"></script>
+<script src="{{ static_url("js/mine.js")}}"></script>
+
+
+</body>
+</html>
